@@ -240,10 +240,25 @@ nav a:hover, nav a.active {
     bottom: 0;
   }
 }
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#E07C30 0%,#EA964A 16%,#F3C589 36%,#FBE6C8 58%,#FAF1DC 78%,#EDF1DA 100%)}
-.hero-sun{position:absolute;top:-6%;left:50%;transform:translateX(-50%);width:min(720px,120vw);height:560px;background:radial-gradient(circle at 50% 40%,rgba(255,251,238,.95),rgba(255,243,214,.45) 38%,rgba(255,243,214,0) 65%);pointer-events:none;z-index:1}
-.hero-content{position:relative;z-index:2;text-align:center;padding:96px 20px 70px;max-width:720px}
+/* HERO — split desktop, portada-como-fondo mobile */
+.hero{min-height:100vh;display:flex;align-items:stretch;justify-content:flex-start;position:relative;overflow:hidden;background:linear-gradient(105deg,#FAF1DC 0%,#F7E3B8 30%,#F0C478 55%,#E98A32 78%,#E07C30 100%);padding:0}
+.hero-sun{position:absolute;top:5%;left:28%;transform:translateX(-50%);width:min(640px,60vw);height:640px;background:radial-gradient(ellipse at 50% 30%,rgba(255,253,245,.92),rgba(255,245,220,.55) 40%,rgba(255,245,220,0) 68%);pointer-events:none;z-index:1}
+.hero-layout{display:flex;width:100%;min-height:100vh;align-items:center;position:relative;z-index:2}
+.hero-content{position:relative;z-index:2;text-align:center;padding:96px clamp(20px,4vw,44px) 80px clamp(24px,6vw,72px);max-width:none;flex:1;min-width:0}
+/* Portada columna derecha (imagen recortada sin textos del póster) */
+.hero-portada{position:relative;width:min(480px,44vw);min-width:300px;align-self:stretch;overflow:hidden;flex-shrink:0}
+.hero-portada img{width:100%;height:100%;object-fit:cover;object-position:75% top;display:block;-webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.6) 18%,black 32%);mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.6) 18%,black 32%)}
+/* Mobile: portada 63vh + countdown debajo */
+@media(max-width:820px){
+  .hero{background:var(--cream);min-height:100svh;overflow:visible;flex-direction:column;align-items:stretch;justify-content:flex-start}
+  .hero-layout{flex-direction:column;min-height:auto;width:100%;align-items:stretch}
+  .hero-portada{position:relative;width:100%;min-width:0;height:63svh;order:-1;flex-shrink:0;align-self:auto}
+  .hero-portada img{object-position:55% top;-webkit-mask-image:linear-gradient(to bottom,black 0%,black 82%,transparent 100%);mask-image:linear-gradient(to bottom,black 0%,black 82%,transparent 100%)}
+  .hero-content{padding:18px 20px 4px;text-align:center;order:0;background:var(--cream);position:relative;z-index:1;flex:1}
+  .hero-sun{display:none}
+  .scroll-hint{position:relative;bottom:auto;left:auto;transform:none;padding:8px 0 16px;animation:bounce 2s ease infinite 2.5s;text-align:center}
+  .shield-container,.hero-eyebrow,.hero h1,.hero-year,.hero-lema-top,.hero-sub{display:none}
+}
 .shield-container{margin:0 auto 20px;width:150px;height:160px;position:relative}
 .shield-glow{position:absolute;inset:-22px;border-radius:50%;background:radial-gradient(circle,rgba(255,252,240,.9),rgba(255,246,222,0) 70%);animation:pulseGlow 3.4s ease-in-out infinite}
 @keyframes pulseGlow{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.12);opacity:1}}
@@ -268,6 +283,7 @@ nav a:hover, nav a.active {
 .cd-block{text-align:center;background:rgba(255,255,255,.78);border:1px solid rgba(201,152,42,.3);border-radius:14px;padding:14px 10px;min-width:clamp(60px,17vw,78px);box-shadow:0 8px 24px rgba(180,120,40,.12);backdrop-filter:blur(4px)}
 .cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,40px);font-weight:700;color:var(--orange);line-height:1}
 .cd-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--earth);margin-top:6px}
+
 
 /* SECTIONS */
 section{padding:80px 20px}
@@ -312,9 +328,9 @@ section{padding:80px 20px}
 /* MENSAJE DEL ALCALDE */
 .alcalde-section{background:linear-gradient(175deg,var(--gold-light) 0%,var(--cream) 100%)}
 .alcalde-card{display:grid;grid-template-columns:1fr;gap:0;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(92,68,12,.12);border:1px solid var(--gold-glow)}
-@media(min-width:720px){.alcalde-card{grid-template-columns:280px 1fr}}
-.alcalde-photo{position:relative;background:linear-gradient(160deg,var(--forest),var(--forest-dark));min-height:320px}
-.alcalde-photo img{width:100%;height:100%;object-fit:cover;object-position:top center}
+@media(min-width:720px){.alcalde-card{grid-template-columns:260px 1fr}.alcalde-photo{height:400px}}
+.alcalde-photo{position:relative;background:linear-gradient(160deg,var(--forest),var(--forest-dark));min-height:280px}
+.alcalde-photo img{width:100%;height:100%;object-fit:cover;object-position:center 12%}
 .alcalde-body{padding:clamp(26px,4vw,40px)}
 .alcalde-body .section-label{margin-bottom:6px}
 .alcalde-body h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--forest-dark);font-weight:600}
@@ -1021,22 +1037,27 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 <!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-sun"></div>
-  <div class="hero-content">
-    <div class="shield-container">
-      <div class="shield-glow"></div>
-      <img class="shield-img" src="imagenes/escudo.png" alt="Escudo de Magdalena — Tierra de Esperanza">
+  <div class="hero-layout">
+    <div class="hero-content">
+      <div class="shield-container">
+        <div class="shield-glow"></div>
+        <img class="shield-img" src="imagenes/escudo.png" alt="Escudo de Magdalena — Tierra de Esperanza">
+      </div>
+      <p class="hero-eyebrow">Gobierno Autónomo Municipal</p>
+      <h1>Magdalena</h1>
+      <div class="hero-year"><span class="hy-num">306</span> <span class="hy-word">años</span></div>
+      <p class="hero-lema-top">Tierra de Esperanza</p>
+      <p class="hero-sub">Mes Aniversario · Fiesta Patronal · Julio 2026</p>
+      <p class="cd-eyebrow">Faltan para el día de la Patrona · 22 de julio</p>
+      <div class="countdown-inner" id="countdown">
+        <div class="cd-block"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Días</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Horas</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-min">--</div><div class="cd-label">Min</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-sec">--</div><div class="cd-label">Seg</div></div>
+      </div>
     </div>
-    <p class="hero-eyebrow">Gobierno Autónomo Municipal</p>
-    <h1>Magdalena</h1>
-    <div class="hero-year"><span class="hy-num">306</span> <span class="hy-word">años</span></div>
-    <p class="hero-lema-top">Tierra de Esperanza</p>
-    <p class="hero-sub">Mes Aniversario · Fiesta Patronal · Julio 2026</p>
-    <p class="cd-eyebrow">Faltan para el día de la Patrona · 22 de julio</p>
-    <div class="countdown-inner" id="countdown">
-      <div class="cd-block"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Días</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Horas</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-min">--</div><div class="cd-label">Min</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-sec">--</div><div class="cd-label">Seg</div></div>
+    <div class="hero-portada">
+      <img src="imagenes/portada-hero.jpg" alt="Santa María Magdalena, Patrona e Iglesia">
     </div>
   </div>
   <div class="scroll-hint">
