@@ -1732,7 +1732,7 @@ const VENUES={
   coliseo_central:{n:'Coliseo Central',c:[-13.261783127925552, -64.05309705477582]},
   coliseo_tinglado:{n:'Coliseo Tinglado',c:[-13.256683365681708, -64.05329102435515]},
   coliseo_grande:{n:'Coliseo Grande',c:[-13.255326968489301, -64.0562615393879]},
-  centro_cultural:{n:'Centro Cultural',c:[-13.25610,-64.05880]},
+  centro_cultural:{n:'Centro Cultural',c:[-13.263241327361408, -64.05499669580477]},
   rio:{n:'Río Itonama',c:[-13.263420489845483, -64.04827332317609]},
   remate:{n:'Centro de remate · ASOGAMAG',c:[-13.267343890314358, -64.06514869686072]},
   haras:{n:'Haras San Pedro',c:[-13.24600,-64.05010]},
@@ -1801,16 +1801,39 @@ function openDay(fecha){
 }
 
 /* ===== MAPA INTERACTIVO ===== */
-/* ===== MAPA INTERACTIVO (GOOGLE MAPS ESTÁNDAR CON RELIEVE) ===== */
 let MAP=null, MARKERS={};
+
+// Función para asignar iconos según el nombre del lugar (solo para los popups)
+function getIcono(nombre) {
+  const n = nombre.toLowerCase();
+  const svgBase = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">';
+  
+  if (n.includes('parroquia') || n.includes('iglesia') || n.includes('cabildo')) {
+    // Icono de Iglesia (Cruz y techo)
+    return `${svgBase}<path d="M12 2v5m-2-2h4m-8 7l6-6 6 6v10H6V12z"/></svg>`;
+  } 
+  if (n.includes('coliseo') || n.includes('cancha')) {
+    // Icono de Coliseo/Estadio (Bandera)
+    return `${svgBase}<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>`;
+  }
+  if (n.includes('cultural') || n.includes('remate')) {
+    // Icono de Centro / Edificio
+    return `${svgBase}<path d="M3 21h18M5 21V9l7-6 7 6v12M9 14h6M9 18h6"/></svg>`;
+  }
+  
+  // Icono por defecto de respaldo
+  return `${svgBase}<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+}
 
 function buildVenueList(){
   document.getElementById('mapaList').innerHTML=VENUE_ORDER.map(k=>{
     const v=VENUES[k];
+    // Se devuelve el icono de PIN original (pinSvg) a la lista de botones
+    const iconToUse = typeof pinSvg !== 'undefined' ? pinSvg : getIcono('default');
+    
     return `<button class="mapa-item" data-key="${k}" onclick="selectVenue('${k}')">
-      <span class="mapa-pin">${pinSvg}</span>
+      <span class="mapa-pin">${iconToUse}</span>
       <span class="mapa-name">${v.n}</span>
-      <a class="mapa-arrow" href="${gmapsURL(v.n)}" target="_blank" rel="noopener noreferrer" title="Abrir en Google Maps" onclick="event.stopPropagation()" style="text-decoration:none">↗</a>
     </button>`;
   }).join('');
 }
@@ -1823,10 +1846,9 @@ function highlightVenue(key){
 function initMap(){
   if(MAP||typeof L==='undefined')return;
   
-  // Iniciamos el mapa. tap: true mejora el toque en celulares.
+  // Iniciamos el mapa
   MAP=L.map('map',{scrollWheelZoom:false,zoomControl:true,tap:true}).setView(MAG_CENTER, 15.5);
   
-  // CAPA DE GOOGLE MAPS ESTÁNDAR (Muestra relieve de edificios en zooms altos)
   L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains: ['mt0','mt1','mt2','mt3'],
@@ -1834,7 +1856,7 @@ function initMap(){
   }).addTo(MAP);
 
   /* =========================================
-     BOTÓN DE MI UBICACIÓN (INTEGRACIÓN NUEVA)
+     BOTÓN DE MI UBICACIÓN
      ========================================= */
   const locateControl = L.control({position: 'topleft'});
   locateControl.onAdd = function (map) {
@@ -1843,7 +1865,6 @@ function initMap(){
       
       div.onclick = function(e){
           e.preventDefault();
-          // Pide la ubicación y acerca la cámara
           MAP.locate({setView: true, maxZoom: 16});
       }
       return div;
@@ -1867,19 +1888,47 @@ function initMap(){
   MAP.on('locationerror', function(e) {
       alert("No pudimos acceder a tu ubicación. Verifica los permisos de tu navegador o GPS.");
   });
-  /* =========================================
-     FIN BOTÓN MI UBICACIÓN
-     ========================================= */
 
+  /* =========================================
+     MARCADORES Y POPUPS COMPACTOS
+     ========================================= */
   VENUE_ORDER.forEach(k=>{
     const v=VENUES[k];
     const icon=L.divIcon({className:'venue-divicon',html:`<div class="venue-marker" data-key="${k}"><div class="vm-pulse"></div><div class="vm-pin"></div></div>`,iconSize:[30,30],iconAnchor:[15,30],popupAnchor:[0,-32]});
     const shortName=v.n.replace(/Parroquia Santa María /,'').replace(/Centro de remate · /,'').replace(/Coliseo /,'Col. ');
+    
+    // Aquí diseñamos el contenido del globito blanco para que sea pequeño e incluya el icono
+    const popupHtml = `
+      <div style="display:flex; flex-direction:column; align-items:center; text-align:center; padding: 2px;">
+        <span style="color:var(--gold); margin-bottom: 6px; display:inline-block;">
+          ${getIcono(v.n)}
+        </span>
+        <div class="vp-name" style="margin-bottom:0; font-size:13px; line-height:1.3; white-space:normal; word-wrap:break-word;">
+          ${v.n}
+        </div>
+      </div>
+    `;
+
+    // Se fuerza el maxWidth a 160px para que no tape el mapa
     const m=L.marker(v.c,{icon}).addTo(MAP)
       .bindTooltip(shortName,{permanent:true,direction:'top',offset:[0,-34],className:'venue-tooltip'})
-      .bindPopup(`<div class="vp-name">${v.n}</div><a class="vp-link" href="${gmapsURL(v.n)}" target="_blank" rel="noopener noreferrer">Abrir en Google Maps ↗</a>`);
+      .bindPopup(popupHtml, {maxWidth: 160, minWidth: 100});
+      
     m.on('click',()=>highlightVenue(k));
     MARKERS[k]=m;
+  });
+
+  /* =========================================
+     LIMPIEZA DE LETREROS AL ALEJARSE
+     ========================================= */
+  MAP.on('zoomend', function() {
+      const currentZoom = MAP.getZoom();
+      const tooltips = document.querySelectorAll('.venue-tooltip');
+      if(currentZoom < 15) {
+          tooltips.forEach(t => t.style.display = 'none');
+      } else {
+          tooltips.forEach(t => t.style.display = 'block');
+      }
   });
 }
 
@@ -1887,7 +1936,6 @@ function selectVenue(key){
   initMap();
   const v=VENUES[key];if(!v||!MAP)return;
   
-  // Zoom en 18 para que Google Maps revele las formas 3D de los edificios
   MAP.flyTo(v.c, 18, {duration: 1.2});
   highlightVenue(key);
   setTimeout(()=>{MARKERS[key]&&MARKERS[key].openPopup();},800);
