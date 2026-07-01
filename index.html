@@ -2045,7 +2045,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
 
 /* ===== COMPARTIR ===== */
 function shareURL(){return window.location.href;}
-const shareText='🎉 ¡Magdalena celebra 306 años! Mes Aniversario y Fiesta Patronal de Santa María Magdalena — Julio 2026. Conoce el programa completo:';
+const shareText='🎉 ¡Te esperamos en Magdalena! El Gobierno Autónomo Municipal te invita con el corazón a celebrar los 306 años y la Fiesta Patronal de Santa María Magdalena — Julio 2026. ¡Bienvenido a la Tierra de Esperanza! 👉 Mirá el programa completo:';
 function shareWhatsApp(){window.open('https://wa.me/?text='+encodeURIComponent(shareText+' '+shareURL()),'_blank');}
 function shareFacebook(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(shareURL()),'_blank');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
