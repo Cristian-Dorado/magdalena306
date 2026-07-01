@@ -56,13 +56,14 @@ nav {
   z-index: 100;
   padding: 12px 0;
   transition: all .4s cubic-bezier(0.25, 1, 0.5, 1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.12) 60%, transparent 100%);
 }
 
 nav.scrolled {
   background: rgba(255, 253, 247, .92);
   box-shadow: 0 4px 30px rgba(140, 90, 20, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 nav .nav-inner {
@@ -86,16 +87,18 @@ nav a {
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
-  color: var(--forest);
+  color: rgba(255,245,220,.92);
   padding: 8px 16px;
   border-radius: 100px;
   transition: all .3s cubic-bezier(0.25, 1, 0.5, 1);
   letter-spacing: .4px;
   white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0,0,0,.3);
 }
 
 nav.scrolled a {
   color: var(--forest);
+  text-shadow: none;
 }
 
 nav a:hover, nav a.active {
@@ -114,9 +117,9 @@ nav a:hover, nav a.active {
    ======================================================== */
 @media (max-width: 820px) {
   nav {
-    background: rgba(255, 253, 247, 0.6); /* Fondo base muy sutil */
+    background: rgba(255, 253, 247, 0.82); /* Fondo base con mas presencia */
     padding: 10px 0;
-    border-bottom: 1px solid rgba(201, 152, 42, 0.1);
+    border-bottom: 1px solid rgba(201, 152, 42, 0.25);
   }
   
   nav .nav-inner {
@@ -132,8 +135,13 @@ nav a:hover, nav a.active {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--forest-dark);
-    font-size: 15px;
-    letter-spacing: 0.5px;
+    font-size: 17px;
+    letter-spacing: 0.6px;
+    text-shadow: 0 1px 2px rgba(255,255,255,.7);
+  }
+  nav.scrolled .nav-mobile-header {
+    color: var(--forest-dark);
+    text-shadow: none;
   }
   
   /* Menú flotante estilo tarjeta fina (Glassmorphism) */
@@ -197,17 +205,21 @@ nav a:hover, nav a.active {
   }
   
   .menu-icon .navicon {
-    background: var(--forest-dark);
+    background: rgba(255,245,220,.95);
     display: block;
     height: 2px;
     position: relative;
     transition: background .2s ease-out;
     width: 22px;
     border-radius: 2px;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.4));
   }
-  
+  nav.scrolled .menu-icon .navicon,
+  nav.scrolled .menu-icon .navicon:before,
+  nav.scrolled .menu-icon .navicon:after { background: var(--forest-dark); filter: none; }
+
   .menu-icon .navicon:before, .menu-icon .navicon:after {
-    background: var(--forest-dark);
+    background: rgba(255,245,220,.95);
     content: '';
     display: block;
     height: 100%;
@@ -240,34 +252,97 @@ nav a:hover, nav a.active {
     bottom: 0;
   }
 }
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#E07C30 0%,#EA964A 16%,#F3C589 36%,#FBE6C8 58%,#FAF1DC 78%,#EDF1DA 100%)}
-.hero-sun{position:absolute;top:-6%;left:50%;transform:translateX(-50%);width:min(720px,120vw);height:560px;background:radial-gradient(circle at 50% 40%,rgba(255,251,238,.95),rgba(255,243,214,.45) 38%,rgba(255,243,214,0) 65%);pointer-events:none;z-index:1}
-.hero-content{position:relative;z-index:2;text-align:center;padding:96px 20px 70px;max-width:720px}
-.shield-container{margin:0 auto 20px;width:150px;height:160px;position:relative}
-.shield-glow{position:absolute;inset:-22px;border-radius:50%;background:radial-gradient(circle,rgba(255,252,240,.9),rgba(255,246,222,0) 70%);animation:pulseGlow 3.4s ease-in-out infinite}
-@keyframes pulseGlow{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.12);opacity:1}}
-.shield-img{width:150px;height:auto;object-fit:contain;position:relative;z-index:1;animation:shieldEntry 1.2s cubic-bezier(.22,1,.36,1) .3s both;filter:drop-shadow(0 8px 22px rgba(140,90,20,.28))}
-@keyframes shieldEntry{from{opacity:0;transform:scale(.5) translateY(30px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.hero-eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--forest);font-weight:600;margin-bottom:12px;animation:fadeInUp .8s ease .6s both}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(46px,12vw,86px);font-weight:700;color:var(--forest);line-height:1;margin-bottom:6px;animation:fadeInUp .8s ease .8s both}
-.hero-year{font-family:'Playfair Display',serif;margin:6px 0 2px;animation:fadeInUp .8s ease 1s both;line-height:1}
-.hero-year .hy-num{font-size:clamp(42px,10vw,68px);font-weight:700;color:var(--orange)}
-.hero-year .hy-word{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(28px,7vw,46px);font-weight:500;color:var(--forest)}
-.hero-lema-top{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(22px,5vw,34px);color:var(--orange);font-weight:500;margin-bottom:14px;animation:fadeInUp .8s ease 1.15s both}
-.hero-sub{font-size:clamp(12px,2.6vw,14px);letter-spacing:1px;color:var(--forest);font-weight:500;margin-bottom:30px;animation:fadeInUp .8s ease 1.3s both}
-.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);text-align:center;animation:bounce 2s ease infinite 2.5s;z-index:2}
-.scroll-text{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--forest);font-weight:600;margin-bottom:8px;opacity:.85}
-.scroll-hint span{display:block;width:18px;height:18px;border-right:2px solid var(--forest);border-bottom:2px solid var(--forest);transform:rotate(45deg);margin:0 auto;opacity:.6}
+/* ═══════════════════════════════════════════════════════════
+   HERO — Portada de la Virgen María como imagen protagonista
+   ═══════════════════════════════════════════════════════════ */
+.hero{position:relative;width:100%;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;overflow:hidden;padding:0;
+  background:linear-gradient(90deg,#e47030 0%,#f0a848 15%,#f5c870 28%,#fcddb8 42%,#d4c0ac 55%,#9ab0c0 72%,#6a9ab4 88%,#4d82a4 100%)}
+.hero-sun{display:none}
+/* Portada: imagen centrada, sin recortar */
+.hero-portada{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center}
+.hero-portada img{height:100%;width:auto;max-width:none;display:block;object-fit:contain}
+/* Bordes laterales: fade amplio y natural que replica los colores del atardecer */
+.hero-portada::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(228,111,39,1) 0%,
+      rgba(240,145,60,.97) 2.5%,
+      rgba(250,168,72,.88) 5%,
+      rgba(252,175,85,.72) 8%,
+      rgba(253,195,120,.5) 12%,
+      rgba(253,220,180,.28) 17%,
+      rgba(253,230,200,.1) 23%,
+      transparent 30%,
+      transparent 70%,
+      rgba(160,185,200,.1) 77%,
+      rgba(140,175,195,.28) 83%,
+      rgba(120,165,190,.5) 88%,
+      rgba(90,145,175,.72) 92%,
+      rgba(70,130,165,.88) 95%,
+      rgba(55,115,150,.97) 97.5%,
+      rgba(50,100,135,1) 100%),
+    linear-gradient(180deg,
+      transparent 0%,
+      transparent 55%,
+      rgba(170,90,55,.35) 72%,
+      rgba(150,80,50,.65) 85%,
+      rgba(130,70,48,.85) 100%)}
+/* Overlay degradado inferior para countdown */
+.hero-portada::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(0,0,0,.08) 0%,
+    transparent 8%,
+    transparent 68%,
+    rgba(8,18,10,.3) 80%,
+    rgba(8,18,10,.65) 90%,
+    rgba(8,18,10,.85) 100%)}
+/* Layout del contenido sobre la imagen */
+.hero-layout{position:relative;z-index:3;width:100%;display:flex;flex-direction:column;align-items:center;margin-top:auto;padding:0 24px 80px}
+.hero-content{text-align:center;max-width:600px;width:100%}
+/* Ocultar textos duplicados — la imagen ya los tiene */
+.shield-container,.shield-glow,.shield-img,
+.hero-eyebrow,.hero h1,.hero-year,.hero-lema-top,.hero-sub{display:none}
+/* Scroll hint */
+.scroll-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);text-align:center;animation:bounce 2.5s ease infinite 3s;z-index:4}
+.scroll-text{font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,240,200,.88);font-weight:600;margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.scroll-hint span{display:block;width:16px;height:16px;border-right:2px solid rgba(255,240,200,.7);border-bottom:2px solid rgba(255,240,200,.7);transform:rotate(45deg);margin:0 auto;opacity:.75}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
 
-/* COUNTDOWN */
-.cd-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--forest);font-weight:600;opacity:.7;margin-bottom:14px;animation:fadeInUp .8s ease 1.4s both}
-.countdown-inner{display:flex;align-items:flex-start;justify-content:center;gap:clamp(8px,2.4vw,16px);max-width:520px;margin:0 auto;animation:fadeInUp .8s ease 1.5s both}
-.cd-block{text-align:center;background:rgba(255,255,255,.78);border:1px solid rgba(201,152,42,.3);border-radius:14px;padding:14px 10px;min-width:clamp(60px,17vw,78px);box-shadow:0 8px 24px rgba(180,120,40,.12);backdrop-filter:blur(4px)}
-.cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,40px);font-weight:700;color:var(--orange);line-height:1}
-.cd-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--earth);margin-top:6px}
+/* COUNTDOWN — glassmorphism sobre la portada */
+.cd-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,235,180,.92);font-weight:600;margin-bottom:14px;animation:fadeInUp .8s ease .6s both;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.countdown-inner{display:flex;align-items:flex-start;justify-content:center;gap:clamp(10px,2.5vw,18px);max-width:520px;margin:0 auto;animation:fadeInUp .8s ease .8s both}
+.cd-block{text-align:center;background:rgba(255,255,255,.15);border:1px solid rgba(255,220,160,.25);border-radius:16px;padding:16px 12px;min-width:clamp(64px,17vw,82px);box-shadow:0 8px 32px rgba(0,0,0,.2);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.cd-num{font-family:'Playfair Display',serif;font-size:clamp(30px,7vw,44px);font-weight:700;color:#FFF;line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.cd-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,230,180,.8);margin-top:6px}
+
+/* Mobile hero */
+@media(max-width:820px){
+.hero{min-height:100svh;justify-content:flex-end}
+.hero-portada{inset:0}
+.hero-portada::before{content:'';position:absolute;inset:0;z-index:-1;background:url('imagenes/portada-resplandor.jpg') center top/cover no-repeat;filter:blur(28px) saturate(1.18) brightness(.8);transform:scale(1.3)}
+.hero-portada img{position:relative;z-index:0;width:100%;height:100%;max-width:none;object-fit:contain;object-position:center 46px}
+.hero-layout{padding:0 16px 88px}
+.scroll-hint{bottom:30px}
+.scroll-text{font-size:9px;letter-spacing:2.5px;color:#fff7e6;font-weight:700;text-shadow:0 1px 4px rgba(0,0,0,.85),0 0 12px rgba(0,0,0,.55)}
+.scroll-hint span{border-color:rgba(255,248,230,.95);opacity:.95}
+.cd-eyebrow{display:none}
+.countdown-inner{gap:8px}
+.cd-block{padding:10px 7px;min-width:clamp(58px,17vw,70px);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.cd-num{font-size:clamp(26px,6.5vw,34px)}
+.cd-label{font-size:8px;letter-spacing:1.5px;margin-top:4px}
+}
+
+/* Desktop hero — contador mas chico y ubicado mas abajo (entre "Aniversario" y la frase de scroll) */
+@media(min-width:821px){
+.hero-layout{padding-bottom:54px}
+.cd-eyebrow{display:none}
+.countdown-inner{gap:12px;max-width:440px}
+.cd-block{padding:11px 10px;min-width:64px;border-radius:13px}
+.cd-num{font-size:34px}
+.cd-label{font-size:8px;letter-spacing:1.8px;margin-top:4px}
+}
+
 
 /* SECTIONS */
 section{padding:80px 20px}
@@ -284,15 +359,6 @@ section{padding:80px 20px}
 .imgband .imgband-cap{position:relative;z-index:2;color:#fff;padding:26px 24px;max-width:880px;margin:0 auto;width:100%}
 .imgband .imgband-cap h3{font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,30px);font-weight:500;margin-bottom:4px;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .imgband .imgband-cap p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--gold-glow);text-shadow:0 2px 10px rgba(0,0,0,.5)}
-
-/* INVITATION */
-.invite-section{background:linear-gradient(175deg,var(--cream) 0%,var(--gold-light) 100%);text-align:center}
-.invite-card{background:#fff;border:1px solid var(--gold-glow);border-radius:16px;padding:clamp(30px,5vw,52px);position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(201,152,42,.1)}
-.invite-card::before,.invite-card::after{content:'';position:absolute;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--forest),var(--gold),var(--orange),var(--gold),var(--forest))}
-.invite-card::before{top:0}.invite-card::after{bottom:0}
-.invite-text{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.5vw,21px);line-height:1.85;color:#3a3a38;max-width:620px;margin:0 auto}
-.invite-text strong{color:var(--forest-dark);font-weight:600}
-.invite-seal{width:84px;height:auto;margin:26px auto 0;opacity:.55}
 
 /* ORIGEN / TIMELINE */
 .origen-section{background:var(--cream)}
@@ -311,20 +377,35 @@ section{padding:80px 20px}
 
 /* MENSAJE DEL ALCALDE */
 .alcalde-section{background:linear-gradient(175deg,var(--gold-light) 0%,var(--cream) 100%)}
-.alcalde-card{display:grid;grid-template-columns:1fr;gap:0;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(92,68,12,.12);border:1px solid var(--gold-glow)}
-@media(min-width:720px){.alcalde-card{grid-template-columns:280px 1fr}}
-.alcalde-photo{position:relative;background:linear-gradient(160deg,var(--forest),var(--forest-dark));min-height:320px}
-.alcalde-photo img{width:100%;height:100%;object-fit:cover;object-position:top center}
-.alcalde-body{padding:clamp(26px,4vw,40px)}
-.alcalde-body .section-label{margin-bottom:6px}
-.alcalde-body h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--forest-dark);font-weight:600}
-.alcalde-body .cargo{font-size:13px;color:var(--earth);margin-bottom:18px}
-.alcalde-msg{font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.8;color:#3a3a38}
-.alcalde-msg p{margin-bottom:12px}
-.alcalde-firma{margin-top:18px;border-top:1px dashed rgba(0,0,0,.12);padding-top:16px}
-.alcalde-firma .nombre{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--forest-dark)}
-.alcalde-firma .sub{font-size:12px;color:var(--earth)}
-.pending-tag{display:inline-block;margin-top:6px;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--orange-dark);background:rgba(224,122,31,.12);border-radius:100px;padding:4px 10px}
+.alcalde-card{background:#fff;border-radius:22px;box-shadow:0 24px 60px rgba(92,68,12,.12);border:1px solid var(--gold-glow);padding:clamp(26px,5vw,52px)}
+.alcalde-grid{display:flex;flex-direction:column;align-items:center;gap:clamp(26px,4vw,44px)}
+.alcalde-photo{position:relative;width:100%;max-width:340px;margin:0;background:linear-gradient(155deg,#fffdf7 0%,#fbf3df 100%);padding:13px;border-radius:6px;box-shadow:0 0 0 1px var(--gold-glow),0 22px 48px rgba(92,68,12,.26),0 4px 12px rgba(92,68,12,.14);border:1px solid var(--gold)}
+.alcalde-photo::before{content:'';position:absolute;inset:7px;border:1px solid rgba(201,152,42,.5);border-radius:4px;pointer-events:none;z-index:3}
+.alcalde-photo::after{content:'';position:absolute;inset:13px;border-radius:3px;pointer-events:none;box-shadow:inset 0 0 16px rgba(92,68,12,.18);z-index:2}
+.alcalde-photo img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 10%;border-radius:3px}
+.alcalde-body{text-align:center;width:100%}
+.alcalde-body .section-label{margin-bottom:8px;letter-spacing:3px}
+.alcalde-body h3{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,30px);color:var(--forest-dark);font-weight:700;margin-bottom:4px}
+.alcalde-body .cargo{font-size:clamp(12px,2.5vw,14px);color:var(--earth);margin-bottom:24px;letter-spacing:.3px}
+.alcalde-sep{width:50px;height:2px;background:var(--gold);margin:0 auto 28px;border:0}
+.alcalde-msg{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3.8vw,18px);line-height:1.85;color:#3a3a38;text-align:left;max-width:660px;margin:0 auto}
+.alcalde-msg p{margin-bottom:14px}
+.alcalde-msg p:first-child{font-style:italic;color:var(--earth);text-align:center;font-size:clamp(17px,4vw,20px)}
+.alcalde-msg p strong{color:var(--forest-dark)}
+.alcalde-firma{margin-top:28px;border-top:1px solid rgba(186,163,120,.3);padding-top:20px;text-align:center;max-width:660px;margin-left:auto;margin-right:auto}
+.alcalde-firma .nombre{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--forest-dark);letter-spacing:.3px}
+.alcalde-firma .sub{font-size:12px;color:var(--earth);margin-top:3px;letter-spacing:.5px}
+@media(min-width:720px){
+.alcalde-grid{display:block}
+.alcalde-grid::after{content:'';display:table;clear:both}
+.alcalde-photo{float:left;width:340px;max-width:340px;margin:6px clamp(32px,4vw,44px) 22px 0}
+.alcalde-body{text-align:left}
+.alcalde-sep{margin-left:0;margin-right:0}
+.alcalde-msg{margin-left:0;max-width:none;font-size:18px}
+.alcalde-msg p:first-child{text-align:left;font-size:20px}
+.alcalde-firma{margin-left:0;max-width:none;text-align:left}
+.alcalde-body h3{font-size:32px}
+}
 
 /* CRONOGRAMA */
 .crono-section{background:linear-gradient(180deg,var(--forest-light) 0%,var(--cream) 18%)}
@@ -1004,12 +1085,12 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 
     <div class="nav-menu">
       <a href="#inicio" onclick="document.getElementById('menu-toggle').checked = false;">Inicio</a>
-      <a href="#origen" onclick="document.getElementById('menu-toggle').checked = false;">Origen</a>
       <a href="#alcalde" onclick="document.getElementById('menu-toggle').checked = false;">Alcalde</a>
+      <a href="#origen" onclick="document.getElementById('menu-toggle').checked = false;">Origen</a>
+      <a href="#fe" onclick="document.getElementById('menu-toggle').checked = false;">Fe</a>
       <a href="#programa" onclick="document.getElementById('menu-toggle').checked = false;">Programa</a>
       <a href="#sedes" onclick="document.getElementById('menu-toggle').checked = false;">Sedes</a>
       <a href="#tradiciones" onclick="document.getElementById('menu-toggle').checked = false;">Tradiciones</a>
-      <a href="#fe" onclick="document.getElementById('menu-toggle').checked = false;">Fe</a>
       <a href="#gastronomia" onclick="document.getElementById('menu-toggle').checked = false;">Sabores</a>
       <a href="#galeria" onclick="document.getElementById('menu-toggle').checked = false;">Galería</a>
       <a href="#auspiciadores" onclick="document.getElementById('menu-toggle').checked = false;">Auspiciadores</a>
@@ -1021,23 +1102,28 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 <!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-sun"></div>
-  <div class="hero-content">
-    <div class="shield-container">
-      <div class="shield-glow"></div>
-      <img class="shield-img" src="imagenes/escudo.svg" alt="Escudo de Magdalena — Tierra de Esperanza">
+  <div class="hero-layout">
+    <div class="hero-content">
+      <div class="shield-container">
+        <div class="shield-glow"></div>
+        <img class="shield-img" src="imagenes/escudo.png" alt="Escudo de Magdalena — Tierra de Esperanza">
+      </div>
+      <p class="hero-eyebrow">Gobierno Autónomo Municipal</p>
+      <h1>Magdalena</h1>
+      <div class="hero-year"><span class="hy-num">306</span> <span class="hy-word">años</span></div>
+      <p class="hero-lema-top">Tierra de Esperanza</p>
+      <p class="hero-sub">Mes Aniversario · Fiesta Patronal · Julio 2026</p>
+      <p class="cd-eyebrow">Faltan para el día de la Patrona · 22 de julio</p>
+      <div class="countdown-inner" id="countdown">
+        <div class="cd-block"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Días</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Horas</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-min">--</div><div class="cd-label">Min</div></div>
+        <div class="cd-block"><div class="cd-num" id="cd-sec">--</div><div class="cd-label">Seg</div></div>
+      </div>
     </div>
-    <p class="hero-eyebrow">Gobierno Autónomo Municipal</p>
-    <h1>Magdalena</h1>
-    <div class="hero-year"><span class="hy-num">306</span> <span class="hy-word">años</span></div>
-    <p class="hero-lema-top">Tierra de Esperanza</p>
-    <p class="hero-sub">Mes Aniversario · Fiesta Patronal · Julio 2026</p>
-    <p class="cd-eyebrow">Faltan para el día de la Patrona · 22 de julio</p>
-    <div class="countdown-inner" id="countdown">
-      <div class="cd-block"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Días</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Horas</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-min">--</div><div class="cd-label">Min</div></div>
-      <div class="cd-block"><div class="cd-num" id="cd-sec">--</div><div class="cd-label">Seg</div></div>
-    </div>
+  </div>
+  <div class="hero-portada">
+    <img src="imagenes/portada-resplandor.jpg" alt="Magdalena 306 Aniversario — Santa María Magdalena, Patrona">
   </div>
   <div class="scroll-hint">
     <p class="scroll-text">Desliza para navegar el río</p>
@@ -1045,27 +1131,47 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   </div>
 </section>
 
-<!-- INVITACIÓN -->
-<section class="invite-section" id="invitacion">
+<!-- MENSAJE DEL ALCALDE -->
+<section class="alcalde-section" id="alcalde">
   <div class="section-inner">
-    <div class="invite-card reveal">
-      <p class="section-label" style="text-align:center">Invitación</p>
-      <div class="gold-line" style="margin:12px auto 24px"></div>
-      <div class="invite-text">
-        <p>El <strong>Gobierno Autónomo Municipal de Magdalena</strong> tiene el grato honor de invitar a usted y a su distinguida familia a celebrar el <strong>Mes Aniversario</strong> y la <strong>Fiesta Patronal de Santa María Magdalena</strong>, en sus <strong>306 años</strong> de fundación.</p>
-        <br>
-        <p>Erigida en <strong>1720</strong> por los misioneros jesuitas a orillas del <strong>río Itonamas</strong>, Magdalena es cuna de la identidad itonama, patrimonio vivo del Beni y orgullo de Bolivia.</p>
-        <br>
-        <p>Los esperamos durante <strong>todo el mes de julio de 2026</strong>, desde el repique de campanas hasta la solemne misa y procesión del <strong>22 de julio</strong>, para compartir nuestra fe, danzas, tradiciones y la alegría de nuestro pueblo.</p>
+    <p class="section-label reveal">Mensaje protocolar</p>
+    <h2 class="section-title reveal">Palabras del Alcalde</h2>
+    <div class="gold-line reveal"></div>
+    <div class="alcalde-card reveal">
+      <div class="alcalde-grid">
+      <figure class="alcalde-photo">
+        <img src="imagenes/alcalde-retrato-pro.jpg" alt="Dr. Jorge Ribera Paz, Alcalde Municipal de Magdalena">
+      </figure>
+      <div class="alcalde-body">
+        <p class="section-label">Salutación — 306 Aniversario y Fiesta Patronal</p>
+        <h3>Dr. Jorge Ribera Paz</h3>
+        <p class="cargo">Honorable Alcalde del Gobierno Autónomo Municipal de Magdalena</p>
+        <hr class="alcalde-sep">
+        <div class="alcalde-msg">
+          <p>Hermanas y hermanos de esta bendita tierra itonama de Magdalena.</p>
+          <p>Hoy nuestro corazón se viste de fiesta. Hoy Magdalena entera celebra con fe, con alegría y con orgullo su aniversario y fiesta patronal de Santa María Magdalena, patrona que nos cobija, que nos une y que nos da identidad como pueblo.</p>
+          <p>En este día sagrado, quiero elevar una oración de gratitud por cada familia, por cada comunario, por cada joven y por cada adulto mayor que hace grande a esta tierra. Magdalena no es solo un lugar en el mapa de la Provincia Iténez. Magdalena es historia, es río, es gente trabajadora, es fe que se transmite de generación en generación.</p>
+          <p><strong>Querido pueblo de Magdalena:</strong></p>
+          <p>Reciban de su alcalde un abrazo fraterno y el compromiso más firme: Trabajar por ustedes, con ustedes y para ustedes.</p>
+          <p>Mi gestión tiene un solo norte: el progreso y el beneficio de cada hogar de esta hermosa tierra itonama. Vamos a seguir abriendo caminos, mejorando la salud, fortaleciendo la educación, apoyando a nuestras familias productoras y emprendedoras, a nuestros pescadores, a nuestros ganaderos y a nuestros artesanos. Porque el desarrollo de Magdalena se construye desde el campo, desde los barrios, desde las riberas del río hasta el último rincón de nuestro Municipio.</p>
+          <p>Que Santa María Magdalena, ejemplo de fe, de entrega y de transformación, nos inspire a seguir unidos. Que su luz nos recuerde que cuando un pueblo camina junto, ningún desafío es demasiado grande.</p>
+          <p><strong>¡Feliz 306 Aniversario y Fiesta Patronal!</strong></p>
+          <p>Que esta fiesta nos renueve la esperanza, nos llene de orgullo y nos comprometa a seguir construyendo juntos el Magdalena que todos soñamos: un Magdalena con más oportunidades, con más dignidad y con más futuro para nuestros hijos.</p>
+          <p><strong>¡Que viva Santa María Magdalena!</strong><br><strong>¡Que viva el pueblo noble y trabajador de Magdalena!</strong></p>
+        </div>
+        <div class="alcalde-firma">
+          <div class="nombre">Dr. Jorge Ribera Paz</div>
+          <div class="sub">Honorable Alcalde Municipal · Gestión 2026 – 2031</div>
+        </div>
       </div>
-      <img class="invite-seal" src="imagenes/escudo.png" alt="">
+      </div>
     </div>
   </div>
 </section>
 
 <!-- BANDA IMAGEN: iglesia -->
 <div class="imgband reveal-scale">
-  <img src="./imagenes/iglesia fiesta arera1.svg " alt="Vista aérea de la Iglesia Misional de Santa María Magdalena" loading="lazy">
+  <img src="imagenes/iglesia-aerea.jpg" alt="Vista aérea de la Iglesia Misional de Santa María Magdalena" loading="lazy">
   <div class="imgband-cap">
     <h3>La Iglesia Misional</h3>
     <p>Corazón de la fe y la traza colonial de Magdalena</p>
@@ -1107,33 +1213,50 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   </div>
 </section>
 
-<!-- MENSAJE DEL ALCALDE -->
-<section class="alcalde-section" id="alcalde">
+<!-- BANDA IMAGEN: río -->
+<div class="imgband reveal-scale">
+  <img src="imagenes/rio-atardecer.jpg" alt="Atardecer en el río Itonamas" loading="lazy">
+  <div class="imgband-cap">
+    <h3>El río Itonamas</h3>
+    <p>Eje fundacional y alma de Magdalena</p>
+  </div>
+</div>
+
+<!-- LA FE / LA PATRONA -->
+<section class="fe-section" id="fe">
   <div class="section-inner">
-    <p class="section-label reveal">Mensaje protocolar</p>
-    <h2 class="section-title reveal">Palabras del Alcalde</h2>
-    <div class="gold-line reveal"></div>
-    <div class="alcalde-card reveal">
-      <div class="alcalde-photo">
-        <img src="imagenes/alcalde-retrato.jpg" alt="Dr. Jorge Ribera Paz, Alcalde Municipal de Magdalena">
+    <div class="fe-head">
+      <p class="section-label reveal">La fe de un pueblo</p>
+      <h2 class="section-title reveal">Santa María Magdalena, nuestra Patrona</h2>
+      <p class="section-sub reveal">Nueve días de novena que culminan el 22 de julio</p>
+      <div class="gold-line reveal"></div>
+    </div>
+    <div class="fe-grid">
+      <div class="fe-photo reveal-left">
+        <img src="imagenes/patrona.jpg" alt="Imagen de la Patrona Santa María Magdalena" loading="lazy">
       </div>
-      <div class="alcalde-body">
-        <p class="section-label">Gobierno Autónomo Municipal de Magdalena</p>
-        <h3>Dr. Jorge Ribera Paz</h3>
-        <p class="cargo">Alcalde Municipal · Gestión 2026 – 2031</p>
-        <div class="alcalde-msg">
-          <p>Con profundo orgullo invito a todo el pueblo de Magdalena, a sus hijos en otras tierras y a nuestros visitantes, a vivir juntos los 306 años de nuestra querida tierra y la fiesta de nuestra Patrona, Santa María Magdalena.</p>
-          <p>Que este mes de julio nos una en la fe, la cultura y la alegría que nos identifican como itonamas y benianos.</p>
-        </div>
-        <div class="alcalde-firma">
-          <div class="nombre">Dr. Jorge Ribera Paz</div>
-          <div class="sub">Alcalde Municipal de Magdalena</div>
-          <span class="pending-tag">Texto y video oficiales · pendientes de entrega</span>
+      <div class="fe-text reveal-right">
+        <p>Cada julio, Magdalena vive su devoción más honda. Desde el <strong>repique de campanas</strong> y el saludo a la aurora, la <strong>novena a Santa María Magdalena</strong> reúne al pueblo durante nueve días de oración, cantos y procesiones.</p>
+        <p>La <strong>peregrinación por el río Itonama</strong>, el <strong>Yorebabaste</strong> entonado en su honor y el <strong>velorio de la Patrona</strong> preparan el corazón para el día central: la <strong>solemne misa y procesión del 22 de julio</strong>.</p>
+        <div class="fe-points">
+          <span class="fe-point">⛪ 9 días de novena</span>
+          <span class="fe-point">🔔 Saludo a la aurora</span>
+          <span class="fe-point">🛶 Procesión por el río</span>
+          <span class="fe-point">✝️ Misa solemne · 22 de julio</span>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- BANDA IMAGEN: iglesia con flores -->
+<div class="imgband reveal-scale">
+  <img src="imagenes/igleisa-flores.jpg" alt="Iglesia de Magdalena con alfombra de flores de tajibo" loading="lazy">
+  <div class="imgband-cap">
+    <h3>Tiempo de tajibos en flor</h3>
+    <p>Julio viste de color la plaza y el templo</p>
+  </div>
+</div>
 
 <!-- CRONOGRAMA -->
 <section class="crono-section" id="programa">
@@ -1158,7 +1281,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
     <div class="day-pills reveal" id="dayPills"></div>
     <div class="timeline" id="timeline"></div>
 
-    <p class="crono-note reveal">Los eventos marcados con <strong>★</strong> son los actos ancla de la celebración. El cronograma se encuentra al 95% y permite incorporar sesiones de honor, actos protocolares y números deportivos adicionales sin alterar el diseño.</p>
+    <p class="crono-note reveal">Los eventos marcados con <strong>★</strong> son los actos ancla de la celebración.</p>
   </div>
 </section>
 
@@ -1176,12 +1299,12 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   </div>
 </section>
 
-<!-- BANDA IMAGEN: río -->
+<!-- BANDA IMAGEN: danzas / palo encebao -->
 <div class="imgband reveal-scale">
-  <img src="imagenes/rio-atardecer.svg" alt="Atardecer en el río Itonamas" loading="lazy">
+  <img src="imagenes/palo-encebao.jpg" alt="Palo encebao y danzas típicas en Magdalena" loading="lazy">
   <div class="imgband-cap">
-    <h3>El río Itonamas</h3>
-    <p>Eje fundacional y alma de Magdalena</p>
+    <h3>La fiesta del pueblo</h3>
+    <p>Danzas, palo encebao y devoción a la Patrona</p>
   </div>
 </div>
 
@@ -1266,51 +1389,6 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   </div>
 </section>
 
-<!-- BANDA IMAGEN: danzas / palo encebao -->
-<div class="imgband reveal-scale">
-  <img src="imagenes/palo-encebao.svg" alt="Palo encebao y danzas típicas en Magdalena" loading="lazy">
-  <div class="imgband-cap">
-    <h3>La fiesta del pueblo</h3>
-    <p>Danzas, palo encebao y devoción a la Patrona</p>
-  </div>
-</div>
-
-<!-- LA FE / LA PATRONA -->
-<section class="fe-section" id="fe">
-  <div class="section-inner">
-    <div class="fe-head">
-      <p class="section-label reveal">La fe de un pueblo</p>
-      <h2 class="section-title reveal">Santa María Magdalena, nuestra Patrona</h2>
-      <p class="section-sub reveal">Nueve días de novena que culminan el 22 de julio</p>
-      <div class="gold-line reveal"></div>
-    </div>
-    <div class="fe-grid">
-      <div class="fe-photo reveal-left">
-        <img src="imagenes/patrona.svg" alt="Imagen de la Patrona Santa María Magdalena" loading="lazy">
-      </div>
-      <div class="fe-text reveal-right">
-        <p>Cada julio, Magdalena vive su devoción más honda. Desde el <strong>repique de campanas</strong> y el saludo a la aurora, la <strong>novena a Santa María Magdalena</strong> reúne al pueblo durante nueve días de oración, cantos y procesiones.</p>
-        <p>La <strong>peregrinación por el río Itonama</strong>, el <strong>Yorebabaste</strong> entonado en su honor y el <strong>velorio de la Patrona</strong> preparan el corazón para el día central: la <strong>solemne misa y procesión del 22 de julio</strong>.</p>
-        <div class="fe-points">
-          <span class="fe-point">⛪ 9 días de novena</span>
-          <span class="fe-point">🔔 Saludo a la aurora</span>
-          <span class="fe-point">🛶 Procesión por el río</span>
-          <span class="fe-point">✝️ Misa solemne · 22 de julio</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BANDA IMAGEN: iglesia con flores -->
-<div class="imgband reveal-scale">
-  <img src="imagenes/igleisa-flores.jpg" alt="Iglesia de Magdalena con alfombra de flores de tajibo" loading="lazy">
-  <div class="imgband-cap">
-    <h3>Tiempo de tajibos en flor</h3>
-    <p>Julio viste de color la plaza y el templo</p>
-  </div>
-</div>
-
 <!-- GASTRONOMÍA -->
 <!-- GASTRONOMÍA -->
 <section class="gastro-section" id="gastronomia">
@@ -1322,37 +1400,37 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
     <div class="gastro-grid">
       
       <div class="gastro-card reveal-scale">
-        <img src="./imagenes/gastronomia/camba muerto.svg" alt="Camba muerto" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
+        <img src="./imagenes/gastronomia/camba muerto.png" alt="Camba muerto" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Camba muerto</h4>
         <p>Plato emblemático con carne seca, arroz, plátano y queso</p>
       </div>
       
       <div class="gastro-card reveal-scale">
-        <img src="./imagenes/gastronomia/patasca.svg" alt="Patasca" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
+        <img src="./imagenes/gastronomia/patasca.jpg" alt="Patasca" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Patasca</h4>
         <p>Sopa tradicional con maíz pelado, carne y especias de la región</p>
       </div>
       
       <div class="gastro-card reveal-scale">
-        <img src="./imagenes/gastronomia/masaco con bife.svg" alt="Asadito al palo" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
+        <img src="./imagenes/gastronomia/masaco con bife.jpg" alt="Asadito al palo" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Masaco con Bife</h4>
         <p>Clásico masaco tradicional acompañado de un bife jugoso y en su punto.</p>
       </div>
       
       <div class="gastro-card reveal-scale">
-        <img src="./imagenes/gastronomia/majadito.svg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
+        <img src="./imagenes/gastronomia/majadito.jpg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Majadito de Charque</h4>
         <p>Tradicional arroz sazonado con charque desmenuzado, servido con huevo frito y plátano maduro.</p>
       </div>
 
        <div class="gastro-card reveal-scale">
-        <img src="./imagenes/gastronomia/locro.svg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
+        <img src="./imagenes/gastronomia/locro.jpg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Locro de Gallina</h4>
         <p>Reconfortante sopa tradicional beniana de gallina criolla con arroz, sazonada con el toque auténtico de nuestra tierra.</p>
       </div>
 
        <div class="gastro-card reveal-scale">
-        <img src="./imagenes/gastronomia/sudau.svg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
+        <img src="./imagenes/gastronomia/sudau.jpg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Sudau de Pescado</h4>
         <p>Tradicional sudado de pescado fresco de la región, cocinado a fuego lento con yuca, plátano y el sazón aromático de nuestra tierra.</p>
       </div>
@@ -1371,22 +1449,21 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
     <p class="section-sub reveal">Hermosa tierra itonama</p>
     <div class="gold-line reveal"></div>
     <div class="gal-grid reveal">
-      <div class="gal-item tall" onclick="openLB(this)"><img src="./imagenes/tajibo amarillo.svg" alt="Plaza con toborochi en flor al atardecer" loading="lazy"><div class="gal-cap">Plaza principal · tajibo amarillo</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/iglesia-fiesta.svg" alt="Iglesia en día de fiesta" loading="lazy"><div class="gal-cap">Iglesia en día de fiesta</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/danza-patrona.svg" alt="Danza folclórica con la Patrona" loading="lazy"><div class="gal-cap">Danza a la Patrona</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/plaza-aerea.svg" alt="Vista aérea de la plaza de Magdalena" loading="lazy"><div class="gal-cap">Plaza de Magdalena</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/campana-sol.svg" alt="Campana de la iglesia al sol" loading="lazy"><div class="gal-cap">Campanas de la Misión</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/atardecer-pueblo.svg" alt="Calle de la iglesia al atardecer" loading="lazy"><div class="gal-cap">Atardecer itonama</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/danza-folclorica.svg" alt="Entrada folclórica" loading="lazy"><div class="gal-cap">Entrada folclórica</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/rio-playa.svg" alt="El río Itonamas en temporada de playa" loading="lazy"><div class="gal-cap">Playas del Itonamas</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/letras-magda.svg" alt="Monumento Magdalena Hermosa Tierra Itonama" loading="lazy"><div class="gal-cap">Hermosa tierra itonama</div></div>
-      <div class="gal-item tall" onclick="openLB(this)"><img src="imagenes/calle-magda.svg" alt="Tajibo amarillo en flor en la plaza" loading="lazy"><div class="gal-cap">Calles magdalena</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/fuente-magda.svg" alt="Iglesia con alfombra de flores moradas" loading="lazy"><div class="gal-cap">Fuente de delfines</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/palo-encebadoo.svg" alt="Atardecer en las calles de Magdalena" loading="lazy"><div class="gal-cap">Cae la tarde</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/fiesta-magda1.svg" alt="Monumento a la fundación de Magdalena" loading="lazy"><div class="gal-cap">Fiesta magdalena</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/fiesta-magda2.svg" alt="Fuente de los bufeos en la plaza" loading="lazy"><div class="gal-cap">Danza guayoyane</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/fiesta-magda3.svg" alt="Fachada de la iglesia de Magdalena" loading="lazy"><div class="gal-cap">Danza del machetero</div></div>
-      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/Rio-magda.svg" alt="Fachada de la iglesia de Magdalena" loading="lazy"><div class="gal-cap">Danza del machetero</div></div>
+      <div class="gal-item tall" onclick="openLB(this)"><img src="imagenes/plaza-toborochi-atardecer.jpg" alt="Plaza con toborochi en flor al atardecer" loading="lazy"><div class="gal-cap">Plaza principal · toborochis en flor</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/iglesia-fiesta.jpg" alt="Iglesia en día de fiesta" loading="lazy"><div class="gal-cap">Iglesia en día de fiesta</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/danza-patrona.jpg" alt="Danza folclórica con la Patrona" loading="lazy"><div class="gal-cap">Danza a la Patrona</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/plaza-aerea.jpg" alt="Vista aérea de la plaza de Magdalena" loading="lazy"><div class="gal-cap">Plaza de Magdalena</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/campana-sol.jpg" alt="Campana de la iglesia al sol" loading="lazy"><div class="gal-cap">Campanas de la Misión</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/calle-atardecer.jpg" alt="Calle de la iglesia al atardecer" loading="lazy"><div class="gal-cap">Atardecer itonama</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/danza-folclorica.jpg" alt="Entrada folclórica" loading="lazy"><div class="gal-cap">Entrada folclórica</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/rio-playa.jpg" alt="El río Itonamas en temporada de playa" loading="lazy"><div class="gal-cap">Playas del Itonamas</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/monumento-magdalena.jpg" alt="Monumento Magdalena Hermosa Tierra Itonama" loading="lazy"><div class="gal-cap">Hermosa tierra itonama</div></div>
+      <div class="gal-item tall" onclick="openLB(this)"><img src="imagenes/tajibo-amarillo.jpg" alt="Tajibo amarillo en flor en la plaza" loading="lazy"><div class="gal-cap">Tajibos en flor</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/iglesia-flores.jpg" alt="Iglesia con alfombra de flores moradas" loading="lazy"><div class="gal-cap">El templo en julio</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/atardecer-pueblo.jpg" alt="Atardecer en las calles de Magdalena" loading="lazy"><div class="gal-cap">Cae la tarde</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/monumento-fundacion.jpg" alt="Monumento a la fundación de Magdalena" loading="lazy"><div class="gal-cap">Monumento a la fundación</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/fuente-plaza.jpg" alt="Fuente de los bufeos en la plaza" loading="lazy"><div class="gal-cap">Fuente de la plaza</div></div>
+      <div class="gal-item" onclick="openLB(this)"><img src="imagenes/iglesia-restaurada.jpg" alt="Fachada de la iglesia de Magdalena" loading="lazy"><div class="gal-cap">Fachada de la Misión</div></div>
     </div>
   </div>
 </section>
@@ -1404,7 +1481,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
       <!-- TARJETA 1: PASOCAS -->
       <div class="ausp-card-premium">
         <div class="ausp-img-box">
-          <img src="./imagenes/aus-chaponato.svg" alt="Pasocas Fiannyell" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🥜</span><br><b>Pasocas Fiannyell</b>'">
+          <img src="./imagenes/aus-chaponato.png" alt="Pasocas Fiannyell" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🥜</span><br><b>Pasocas Fiannyell</b>'">
         </div>
         <div class="ausp-details">
           <h4>Chaponato</h4>
@@ -1419,7 +1496,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
       <!-- TARJETA 2: SALSA ITONAMA -->
       <div class="ausp-card-premium">
         <div class="ausp-img-box">
-          <img src="./imagenes/aus-salsaitonama.svg" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
+          <img src="./imagenes/aus-salsaitonama.jpeg" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
         </div>
         <div class="ausp-details">
           <h4>Salsa Itonama del Tío Oscar</h4>
@@ -1433,7 +1510,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 
          <div class="ausp-card-premium">
         <div class="ausp-img-box">
-          <img src="./imagenes/aus-alejandra.svg" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
+          <img src="./imagenes/aus-alejandra.png" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
         </div>
         <div class="ausp-details">
           <h4>Salsas Alejandra Montero</h4>
@@ -1447,7 +1524,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 
       <div class="ausp-card-premium">
         <div class="ausp-img-box">
-          <img src="./imagenes/aus-pasoca.svg" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
+          <img src="./imagenes/aus-pasoca.png" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
         </div>
         <div class="ausp-details">
           <h4>Pasocas Fiannyell</h4>
@@ -1461,7 +1538,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 
         <div class="ausp-card-premium">
         <div class="ausp-img-box">
-          <img src="./imagenes/aus-laclinuda.svg" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
+          <img src="./imagenes/aus-laclinuda.jpg" alt="Salsa Itonama del Tío Oscar" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:42px;\'>🌶️</span><br><b>Salsa Itonama</b>'">
         </div>
         <div class="ausp-details">
           <h4>La clinuda</h4>
@@ -1565,23 +1642,23 @@ const CAT={
 };
 const EVENTOS=[
   ['30/06','Mar','11:30','Repique de campanas en honor al mes aniversario','Parroquia','religioso',false],
-  ['01/07','Mié','05:00','Repique de campanas: inicio de la novena a la Virgen del Carmen','Parroquia','religioso',false],
   ['01/07','Mié','12:00','Entrega del vitral con la imagen de la Santa Patrona (donación familia Suárez Veza)','Parroquia','religioso',false],
   ['01/07','Mié','16:00','Peregrinación de Santa María Magdalena por el río Itonama','Río Itonama','religioso',true],
   ['03/07','Vie','19:00','Olimpiadas de Salud de la provincia Iténez 2026 (inauguración)','Coliseo tinglado','deportivo',false],
   ['04/07','Sáb','08:00','Encuentro deportivo: delegaciones de Baures, Huacaraje y Magdalena','Coliseo tinglado','deportivo',false],
   ['05/07','Dom','13:00','Fiesta deportiva: clausura oficial y entrega de premios','Centro cultural','deportivo',false],
+  ['07/07','Mar','04:00','Repique de campanas: inicio de la novena a la Virgen del Carmen','Parroquia','religioso',false],
   ['07/07','Mar','19:00','Iténez Unidos: básquet damas y varones','Coliseo central','deportivo',false],
   ['08/07','Mié','19:00','Iténez Unidos: básquet damas y varones','Coliseo central','deportivo',false],
   ['08/07','Mié','19:30','Desfile de faroles por el aniversario de la provincia Iténez','Plaza Principal','civico',false],
   ['09/07','Jue','08:00','Acto cívico y desfile en homenaje a la creación de la provincia Iténez','Plaza Principal','civico',true],
-  ['09/07','Jue','17:00','Feria Magdalena Emprende','Plaza Principal','feria',false],
+  ['09/07','Jue','08:00','Feria Magdalena Emprende','Plaza Principal','feria',false],
   ['09/07','Jue','19:00','Iténez Unidos: básquet damas y varones','Coliseo central','deportivo',false],
   ['10/07','Vie','08:00','Feria multidisciplinaria educativa (estudiantes y maestros)','Plaza Principal','cultural',false],
-  ['10/07','Vie','17:00','Feria Magdalena Emprende','Plaza Principal','feria',false],
+  ['10/07','Vie','16:00','Feria Magdalena Emprende','Plaza Principal','feria',false],
   ['12/07','Dom','06:00','Gran minga de limpieza de todo el pueblo','Todo el pueblo','civico',false],
   ['13/07','Lun','Todo el día','Día del Tipoy','Todo el pueblo','cultural',true],
-  ['13/07','Lun','05:00','Repique de campanas: continúa la novena de la Virgen del Carmen','Parroquia','religioso',false],
+  ['13/07','Lun','05:00','Repique de campanas: inicio de la novena a la Patrona Santa María Magdalena','Parroquia','religioso',false],
   ['13/07','Lun','19:30','Celebración eucarística: inicio de la novena a Santa María Magdalena','Parroquia','religioso',true],
   ['13/07','Lun','20:30','Procesión de inicio de la novena de Santa María Magdalena','Parroquia','religioso',false],
   ['14/07','Mar','05:00','Saludo a la aurora y repique — 2.º día de novena','Parroquia','religioso',false],
@@ -1600,22 +1677,24 @@ const EVENTOS=[
   ['18/07','Sáb','08:00','Feria integral de salud','Plaza Principal','feria',false],
   ['18/07','Sáb','08:00','Carrera de caballos','Haras San Pedro','tradicion',false],
   ['18/07','Sáb','10:00','Riña de gallos','Corro Chalamama','tradicion',false],
-  ['18/07','Sáb','17:00','Feria Magdalena Emprende (Mujeres Emprendedoras)','Plaza Principal','feria',false],
+  ['18/07','Sáb','08:00','Feria Magdalena Emprende (Mujeres Emprendedoras)','Plaza Principal','feria',false],
   ['18/07','Sáb','19:00','Fiesta del Tipoy','Centro Cultural','cultural',true],
   ['18/07','Sáb','19:00','Voleibol damas y varones','Coliseo tinglado','deportivo',false],
   ['18/07','Sáb','19:30','Festival folclórico y elección de la TIYAYA’CHA 2026','Coliseo Grande','cultural',true],
   ['19/07','Dom','05:00','Saludo a la aurora y repique — 7.º día de novena','Parroquia','religioso',false],
   ['19/07','Dom','15:00','XIII Remate Élite y Comercial ASOGAMAG — “La ganadería, pasión de pueblo”','Centro de remate','tradicion',true],
-  ['19/07','Dom','17:00','Feria Magdalena Emprende (Mujeres Emprendedoras)','Plaza Principal','feria',false],
+  ['19/07','Dom','08:00','Feria Magdalena Emprende (Mujeres Emprendedoras)','Plaza Principal','feria',false],
   ['19/07','Dom','19:00','Básquet damas y varones','Coliseo central','deportivo',false],
   ['20/07','Lun','05:00','Saludo a la aurora y repique — 8.º día de novena','Parroquia','religioso',false],
   ['20/07','Lun','08:00','Carrera de caballos','Stud Pequin','tradicion',false],
   ['20/07','Lun','09:00','Carrera de motos','Corro 22 de julio','tradicion',false],
   ['20/07','Lun','19:00','Básquet damas y varones','Coliseo central','deportivo',false],
   ['21/07','Mar','05:00','Saludo a la aurora y repique — 9.º día de novena','Parroquia','religioso',false],
-  ['21/07','Mar','09:00','Entrada folclórica: estudiantes y maestros de las U.E. de Magdalena','Plaza Principal','cultural',true],
+  ['21/07','Mar','09:00','Sesión de honor y reconocimiento a personalidades destacadas','Centro Cultural','civico',true],
+  ['21/07','Mar','14:00','Entrada folclórica: estudiantes y maestros de las U.E. de Magdalena','Plaza Principal','cultural',true],
   ['21/07','Mar','19:00','Básquet damas y varones','Coliseo central','deportivo',false],
   ['21/07','Mar','20:00','Eucaristía a la Patrona Santa María Magdalena','Parroquia','religioso',false],
+  ['21/07','Mar','21:00','Fiesta social y coronación de la MIPI’ICA y TIYAYA’CHA','Centro Cultural','cultural',true],
   ['21/07','Mar','22:00','Velorio de la Patrona Santa María Magdalena','Parroquia','religioso',true],
   ['22/07','Mié','05:00','Saludo a la aurora con repique en honor a la Patrona','Parroquia','religioso',true],
   ['22/07','Mié','06:00','Parada del palo encebao a cargo del Cabildo Indigenal y pueblo','Cabildo','tradicion',true],
@@ -1639,9 +1718,10 @@ const DIA_TITULO={
   '09/07':'Aniversario de la provincia Iténez',
   '16/07':'Virgen del Carmen y entrada del palo encebao',
   '18/07':'Fiesta del Tipoy y festivales folclóricos',
-  '19/07':'Remate ASOGAMAG'
+  '19/07':'Remate ASOGAMAG',
+  '21/07':'Víspera — Sesión de honor, entrada folclórica y velorio'
 };
-const ABIERTOS_DEFAULT=['22/07','13/07'];
+const ABIERTOS_DEFAULT=['22/07'];
 
 /* ===== RENDER ===== */
 const timeline=document.getElementById('timeline');
