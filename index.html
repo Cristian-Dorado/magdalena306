@@ -32,7 +32,192 @@
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 
+<!-- FUENTES ELEGANTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
 <style>
+/* ==========================================================================
+   CSS COMPLETO - INVITACIÓN DIGITAL (VERSION CORREGIDA)
+   ========================================================================== */
+#pantalla-invitacion {
+            position: fixed; inset: 0; z-index: 999999;
+            /* Fondo base claro */
+            background: radial-gradient(circle at center, #ffffff 0%, #fdf9f1 40%, #efe5d2 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow: hidden; margin: 0; padding: 0;
+            transition: opacity 1s ease, transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Foco de luz cálida detrás del sobre para mayor iluminación */
+        .resplandor-centro {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw; height: 100vw; max-width: 800px; max-height: 800px;
+            background: radial-gradient(circle, rgba(255, 230, 160, 0.5) 0%, rgba(255, 240, 200, 0.2) 40%, transparent 70%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ==================================================================
+           2. PARTÍCULAS MÁGICAS (Extra lucesitas doradas)
+           ================================================================== */
+        .particula-magica {
+            position: absolute; bottom: -20px;
+            background: #ffcf54; border-radius: 50%;
+            box-shadow: 0 0 12px 3px rgba(255, 160, 50, 0.6);
+            animation: flotar-magia linear infinite;
+            z-index: 2; opacity: 0;
+        }
+
+        /* Originales */
+        .p1 { left: 10%; width: 6px; height: 6px; animation-duration: 7s; animation-delay: 0s; }
+        .p2 { left: 25%; width: 10px; height: 10px; animation-duration: 9s; animation-delay: 2s; background: #ffaa44; }
+        .p3 { left: 45%; width: 5px; height: 5px; animation-duration: 6s; animation-delay: 4s; }
+        .p4 { left: 65%; width: 8px; height: 8px; animation-duration: 8s; animation-delay: 1s; }
+        .p5 { left: 85%; width: 12px; height: 12px; animation-duration: 10s; animation-delay: 3s; background: #ffb347; }
+        /* Nuevas lucecitas para llenar más el espacio */
+        .p6 { left: 15%; width: 7px; height: 7px; animation-duration: 6.5s; animation-delay: 1.5s; }
+        .p7 { left: 35%; width: 5px; height: 5px; animation-duration: 7.5s; animation-delay: 0.5s; }
+        .p8 { left: 55%; width: 9px; height: 9px; animation-duration: 8.5s; animation-delay: 3.5s; }
+        .p9 { left: 75%; width: 6px; height: 6px; animation-duration: 6s; animation-delay: 2.5s; background: #ffaa44; }
+        .p10 { left: 90%; width: 8px; height: 8px; animation-duration: 9.5s; animation-delay: 1s; }
+        .p11 { left: 50%; width: 11px; height: 11px; animation-duration: 11s; animation-delay: 4.5s; }
+
+        @keyframes flotar-magia {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+
+        /* ==================================================================
+           3. TEXTOS ANIMADOS Y ADAPTADOS PARA CELULAR
+           ================================================================== */
+        .textos-fiesta {
+            text-align: center;
+            z-index: 10;
+            margin-bottom: 35px;
+            padding: 0 20px;
+        }
+
+        /* Animación de entrada elegante (Cascada) */
+        .textos-fiesta h2 { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
+        .textos-fiesta h1 { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s both; }
+        .textos-fiesta p  { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+
+        @keyframes entradaElegante {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .textos-fiesta h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic; font-size: 1.8rem;
+            color: #5c6b4b; margin: 5px 0 10px 0;
+        }
+
+        .textos-fiesta h1 {
+            font-family: 'Cinzel', serif; font-size: 3.2rem;
+            margin: 0; color: #d4af37; text-transform: uppercase;
+            letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .textos-fiesta p {
+            font-family: 'Playfair Display', serif; font-size: 1.2rem;
+            color: #4a593d; margin: 15px auto 0 auto;
+            max-width: 400px; line-height: 1.4;
+        }
+
+        /* AJUSTE MÓVIL: Sube las letras en celular */
+        @media (max-width: 767px) {
+            .textos-fiesta {
+                margin-bottom: 50px; /* Más espacio entre el texto y el sobre */
+                margin-top: -40px;   /* Empuja todo el bloque de texto más arriba */
+            }
+            .textos-fiesta h1 { font-size: 2.6rem; } /* Ajusta un pelín el título para que no se desborde */
+            .textos-fiesta h2 { font-size: 1.5rem; }
+            
+        }
+
+        /* ==================================================================
+           4. EL SOBRE 3D Y EL BOTÓN
+           ================================================================== */
+        .sobre-3d {
+            position: relative;
+            width: 85vw; max-width: 450px;
+            aspect-ratio: 1.6; 
+            z-index: 10; perspective: 2500px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.25); border-radius: 4px;
+        }
+
+        .env-fondo { position: absolute; inset: 0; background: #142412; border-radius: 4px; z-index: 1; }
+        .env-izquierda { position: absolute; inset: 0; z-index: 3; background: #6b8253; clip-path: polygon(0 0, 50% 50%, 0 100%); }
+        .env-derecha { position: absolute; inset: 0; z-index: 3; background: #5c7345; clip-path: polygon(100% 0, 50% 50%, 100% 100%); }
+        .env-abajo { position: absolute; inset: 0; z-index: 4; background: linear-gradient(to top, #4a593d, #6b8253); clip-path: polygon(0 100%, 50% 45%, 100% 100%); filter: drop-shadow(0 -5px 15px rgba(0,0,0,0.15)); }
+        .env-arriba { position: absolute; inset: 0; z-index: 6; background: linear-gradient(to bottom, #8fa078, #6b8253); clip-path: polygon(0 0, 100% 0, 50% 55%); transform-origin: top; transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+
+        .texto-presione {
+            position: absolute; top: 36%; left: 50%; transform: translateX(-50%);
+            font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic;
+            color: #fff; background: rgba(0, 0, 0, 0.5); padding: 4px 12px; border-radius: 20px;
+            z-index: 11; pointer-events: none; animation: latido 2s infinite;
+        }
+        @keyframes latido { 0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.05); } }
+
+       /* ==================================================================
+   BOTÓN DEL SELLO ("M") - AJUSTE INTELIGENTE PC / CELULAR
+   ================================================================== */
+.sello-btn {
+    position: absolute; 
+    top: 55%; /* Centrado para PC */
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 110px; /* Tamaño elegante para pantallas grandes */
+    height: 110px; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer;
+    z-index: 10; 
+    padding: 0; 
+    transition: transform 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.sello-btn img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); 
+}
+
+.sello-btn:active { 
+    transform: translate(-50%, -50%) scale(0.9); 
+}
+
+/* --- MODO CELULAR: Sello más pequeño y mejor ubicado --- */
+@media (max-width: 767px) {
+    .sello-btn {
+        width: 85px;  /* Lo encogemos para que no tape todo el sobre */
+        height: 85px; 
+        top: 52%;     /* Lo subimos ligeramente para que clave justo en el pico de la V móvil */
+    }
+}
+
+        /* ==================================================================
+           5. TRANSICIÓN DE APERTURA AL HACER CLIC
+           ================================================================== */
+        .abierto .sello-btn { opacity: 0; pointer-events: none; }
+        .abierto .texto-presione { opacity: 0; transition: opacity 0.3s; }
+        .abierto .env-arriba { transform: rotateX(180deg); filter: brightness(0.6); }
+        
+        .transicion-zoom {
+            transform: scale(2.5); 
+            opacity: 0; 
+            pointer-events: none;
+        }
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
 --gold:#C9982A;--gold-light:#F9ECCC;--gold-dark:#5C440C;--gold-glow:#F0D48A;
@@ -1077,10 +1262,107 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* =========================================
+   BOTÓN DE MÚSICA FLOTANTE (Blindado para móvil)
+   ========================================= */
+.musica-flotante {
+  position: fixed !important; /* Fuerza a que quede pegado */
+  bottom: 25px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(180, 120, 40, 0.4);
+  cursor: pointer;
+  z-index: 999999 !important; /* Valor exagerado para que nada lo tape en celular */
+  transition: all 0.3s ease;
+  opacity: 0.85;
+  -webkit-transform: translateZ(0); /* Truco de oro para evitar que iOS rompa el 'fixed' */
+}
+
+/* En celulares lo levantamos un poco para que el menú del navegador no lo pise */
+@media (max-width: 768px) {
+  .musica-flotante {
+    bottom: 35px; 
+    right: 15px;
+  }
+}
+
+.musica-flotante:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Animación de latido cuando la música está sonando */
+.musica-activa {
+  animation: latidoMusical 2s infinite ease-in-out;
+}
+
+@keyframes latidoMusical {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 152, 42, 0.6); }
+  50% { box-shadow: 0 0 0 12px rgba(201, 152, 42, 0); }
+}
 </style>
 </head>
 <body>
+<!-- AQUI PONES LA RUTA DE TU CANCIÓN -->
+    <audio id="musica-magdalena" src="./imagenes/audio/campana-yorebabaste.AAC" preload="auto"></audio>
 
+    <div id="pantalla-invitacion">
+        
+        <!-- RESPLANDOR Y LUCES MÁGICAS -->
+        <div class="resplandor-centro"></div>
+        <div class="particula-magica p1"></div>
+        <div class="particula-magica p2"></div>
+        <div class="particula-magica p3"></div>
+        <div class="particula-magica p4"></div>
+        <div class="particula-magica p5"></div>
+        <div class="particula-magica p6"></div>
+        <div class="particula-magica p7"></div>
+        <div class="particula-magica p8"></div>
+        <div class="particula-magica p9"></div>
+        <div class="particula-magica p10"></div>
+        <div class="particula-magica p11"></div>
+
+        <div class="particula-magica p8"></div>
+        <div class="particula-magica p9"></div>
+        <div class="particula-magica p10"></div>
+        <div class="particula-magica p11"></div>
+           <div class="particula-magica p8"></div>
+        <div class="particula-magica p9"></div>
+        <div class="particula-magica p10"></div>
+        <div class="particula-magica p11"></div>
+
+        <!-- TEXTOS CON ANIMACIÓN DE ENTRADA -->
+        <div class="textos-fiesta">
+            <h2>306 Años de Historia</h2>
+            <h1>Magdalena</h1>
+            <p>Estás invitado a ser parte de la gran fiesta de nuestro pueblo.</p>
+        </div>
+
+        <!-- EL SOBRE 3D -->
+        <div id="el-sobre" class="sobre-3d">
+            <div class="env-fondo"></div>
+            <div class="env-izquierda"></div>
+            <div class="env-derecha"></div>
+            <div class="env-abajo"></div>
+            <div class="env-arriba"></div>
+            
+            <div class="texto-presione">Presione aquí</div>
+
+            <button id="btn-sello" class="sello-btn">
+                <img src="./imagenes/cultura danzas/sello.png" alt="Sello M">
+            </button>
+        </div>
+
+    </div>
 <!-- NAV -->
 <!-- NAV RESPONSIVE MEJORADO -->
 <nav id="mainNav">
@@ -2054,6 +2336,88 @@ function copyLink(){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>showToast('✓ Enlace copiado')).catch(()=>showToast(url));}
   else{const t=document.createElement('textarea');t.value=url;document.body.appendChild(t);t.select();try{document.execCommand('copy');showToast('✓ Enlace copiado');}catch(e){showToast(url);}document.body.removeChild(t);}
 }
+
+
+/* ===== sobre ===== */
+document.addEventListener('DOMContentLoaded', () => {
+    // ELEMENTOS DEL SOBRE
+    const btnSello = document.getElementById('btn-sello');
+    const sobre = document.getElementById('el-sobre');
+    const pantalla = document.getElementById('pantalla-invitacion');
+    
+    // ELEMENTOS DE MÚSICA
+    const audio = document.getElementById('musica-magdalena');
+    const btnMusica = document.getElementById('btn-musica');
+    const iconoPlay = document.getElementById('icono-play');
+    const iconoPausa = document.getElementById('icono-pausa');
+
+    // === FUNCIÓN PARA ACTUALIZAR EL BOTÓN FLOTANTE ===
+    function actualizarInterfazMusica() {
+        if (audio.paused) {
+            // Si está pausado: muestra Play, esconde Pausa, quita animación
+            iconoPlay.style.display = 'block';
+            iconoPausa.style.display = 'none';
+            btnMusica.classList.remove('musica-activa');
+        } else {
+            // Si está sonando: muestra Pausa, esconde Play, activa animación
+            iconoPlay.style.display = 'none';
+            iconoPausa.style.display = 'block';
+            btnMusica.classList.add('musica-activa');
+        }
+    }
+
+    // === CONTROL DEL BOTÓN FLOTANTE (PLAY / PAUSE) ===
+    btnMusica.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play().then(() => {
+                actualizarInterfazMusica();
+            }).catch(e => console.log("Error al reproducir:", e));
+        } else {
+            audio.pause();
+            actualizarInterfazMusica();
+        }
+    });
+
+    // === ACCIÓN AL ABRIR EL SOBRE ===
+    if (btnSello) {
+        btnSello.addEventListener('click', () => {
+            // 1. Abrir la solapa
+            sobre.classList.add('abierto');
+            
+            // 2. Reproducir música y actualizar el botón flotante
+            if (audio) {
+                audio.play()
+                    .then(() => {
+                        actualizarInterfazMusica(); // El botón flotante se activa automáticamente
+                    })
+                    .catch(e => console.log("Audio esperando interacción", e));
+            }
+            
+            // 3. Transición e invasión cinemática a la web
+            setTimeout(() => {
+                pantalla.classList.add('transicion-zoom');
+                setTimeout(() => {
+                    pantalla.style.display = 'none';
+                }, 1000);
+            }, 600); 
+        });
+    }
+});
+
 </script>
+
+<audio id="musica-magdalena" loop>
+  <source src="./imagenes/audio/campana-yorebabaste.AAC" type="audio/mpeg">
+</audio>
+
+<button id="btn-musica" class="musica-flotante" title="Control de música">
+  <svg id="icono-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+    <path d="M8 5v14l11-7z"/>
+  </svg>
+  <svg id="icono-pausa" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display: none;">
+    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+  </svg>
+</button>
+
 </body>
 </html>
