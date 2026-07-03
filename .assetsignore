@@ -1,0 +1,11 @@
+# Archivos que NO se suben como assets del Worker (assets.directory = ".")
+# El historial de git (.git) supera el limite de 25 MiB por archivo -> excluir.
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+node_modules
+
+# Fuentes crudas que la web no usa (solo se usan las versiones optimizadas)
+imagenes/concejales/foto_concejales.png
+imagenes/concejales/Mensaje conseles.jpeg
