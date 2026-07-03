@@ -9,3 +9,21 @@ node_modules
 # Fuentes crudas que la web no usa (solo se usan las versiones optimizadas)
 imagenes/concejales/foto_concejales.png
 imagenes/concejales/Mensaje conseles.jpeg
+
+# Originales pesados reemplazados por .webp optimizados (quedan como respaldo)
+imagenes/cultura danzas/machetero.svg
+imagenes/cultura danzas/yorebabaste.svg
+imagenes/cultura danzas/juda.svg
+imagenes/cultura danzas/palo encebado.svg
+imagenes/cultura danzas/remate.svg
+imagenes/cultura danzas/ciervo.svg
+imagenes/aus-pasoca.png
+imagenes/aus-chaponato.png
+imagenes/aus-alejandra.png
+imagenes/aus-laclinuda.jpg
+imagenes/aus-salsaitonama.jpeg
+imagenes/cello.png
+
+# Carpeta de gastronomía (sección retirada de la web)
+imagenes/gastronomia
+imagenes/escudo.png
