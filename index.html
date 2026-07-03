@@ -41,44 +41,39 @@
 /* ==========================================================================
    CSS COMPLETO - INVITACIÓN DIGITAL (VERSION CORREGIDA)
    ========================================================================== */
-#pantalla-invitacion {
+ /* ==================================================================
+           1. FONDO CREMITA PREMIUM CON ALTA ILUMINACIÓN
+           ================================================================== */
+        #pantalla-invitacion {
             position: fixed; inset: 0; z-index: 999999;
-            /* Fondo base claro */
             background: radial-gradient(circle at center, #ffffff 0%, #fdf9f1 40%, #efe5d2 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             overflow: hidden; margin: 0; padding: 0;
-            transition: opacity 1s ease, transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: opacity 2s ease, transform 2.5s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        /* Foco de luz cálida detrás del sobre para mayor iluminación */
         .resplandor-centro {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 100vw; height: 100vw; max-width: 800px; max-height: 800px;
-            background: radial-gradient(circle, rgba(255, 230, 160, 0.5) 0%, rgba(255, 240, 200, 0.2) 40%, transparent 70%);
-            z-index: 1;
-            pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 230, 160, 0.45) 0%, rgba(255, 240, 200, 0.15) 40%, transparent 70%);
+            z-index: 1; pointer-events: none;
         }
 
         /* ==================================================================
-           2. PARTÍCULAS MÁGICAS (Extra lucesitas doradas)
+           2. MULTIPLICIDAD DE LUCESITAS (POLVO MÁGICO)
            ================================================================== */
-        .particula-magica {
+       .particula-magica {
             position: absolute; bottom: -20px;
             background: #ffcf54; border-radius: 50%;
             box-shadow: 0 0 12px 3px rgba(255, 160, 50, 0.6);
             animation: flotar-magia linear infinite;
             z-index: 2; opacity: 0;
         }
-
-        /* Originales */
         .p1 { left: 10%; width: 6px; height: 6px; animation-duration: 7s; animation-delay: 0s; }
         .p2 { left: 25%; width: 10px; height: 10px; animation-duration: 9s; animation-delay: 2s; background: #ffaa44; }
         .p3 { left: 45%; width: 5px; height: 5px; animation-duration: 6s; animation-delay: 4s; }
         .p4 { left: 65%; width: 8px; height: 8px; animation-duration: 8s; animation-delay: 1s; }
         .p5 { left: 85%; width: 12px; height: 12px; animation-duration: 10s; animation-delay: 3s; background: #ffb347; }
-        /* Nuevas lucecitas para llenar más el espacio */
         .p6 { left: 15%; width: 7px; height: 7px; animation-duration: 6.5s; animation-delay: 1.5s; }
         .p7 { left: 35%; width: 5px; height: 5px; animation-duration: 7.5s; animation-delay: 0.5s; }
         .p8 { left: 55%; width: 9px; height: 9px; animation-duration: 8.5s; animation-delay: 3.5s; }
@@ -94,129 +89,106 @@
         }
 
         /* ==================================================================
-           3. TEXTOS ANIMADOS Y ADAPTADOS PARA CELULAR
+           3. TEXTOS ANIMADOS (ELEGANCIA EN CASCADA Y MÓVIL OPTIMIZADO)
            ================================================================== */
-        .textos-fiesta {
-            text-align: center;
-            z-index: 10;
-            margin-bottom: 35px;
-            padding: 0 20px;
-        }
-
-        /* Animación de entrada elegante (Cascada) */
-        .textos-fiesta h2 { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
-        .textos-fiesta h1 { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s both; }
-        .textos-fiesta p  { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; }
+        .textos-fiesta { text-align: center; z-index: 10; margin-bottom: 35px; padding: 0 20px; }
+        .textos-fiesta h2 { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color:rgb(122, 59, 45) ; margin: 5px 0 10px 0; }
+        .textos-fiesta h1 { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s both; font-family: 'Cinzel', serif; font-size: 3.2rem; margin: 0; color: #d4af37; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .textos-fiesta p  { animation: entradaElegante 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both; font-family: 'Playfair Display', serif; font-size: 1.2rem; color:rgb(122, 59, 45); margin: 15px auto 0 auto; max-width: 400px; line-height: 1.4; }
 
         @keyframes entradaElegante {
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .textos-fiesta h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; font-size: 1.8rem;
-            color: #5c6b4b; margin: 5px 0 10px 0;
-        }
-
-        .textos-fiesta h1 {
-            font-family: 'Cinzel', serif; font-size: 3.2rem;
-            margin: 0; color: #d4af37; text-transform: uppercase;
-            letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .textos-fiesta p {
-            font-family: 'Playfair Display', serif; font-size: 1.2rem;
-            color: #4a593d; margin: 15px auto 0 auto;
-            max-width: 400px; line-height: 1.4;
-        }
-
-        /* AJUSTE MÓVIL: Sube las letras en celular */
         @media (max-width: 767px) {
-            .textos-fiesta {
-                margin-bottom: 50px; /* Más espacio entre el texto y el sobre */
-                margin-top: -40px;   /* Empuja todo el bloque de texto más arriba */
-            }
-            .textos-fiesta h1 { font-size: 2.6rem; } /* Ajusta un pelín el título para que no se desborde */
-            .textos-fiesta h2 { font-size: 1.5rem; }
-            
+            .textos-fiesta { margin-bottom: 45px; margin-top: -50px; }
+            .textos-fiesta h1 { font-size: 2.5rem; }
+            .textos-fiesta h2 { font-size: 1.4rem; }
         }
 
         /* ==================================================================
-           4. EL SOBRE 3D Y EL BOTÓN
+           4. EL SOBRE CON TU IMAGEN VERDE (CORTES CALIBRADOS AL 74%)
            ================================================================== */
         .sobre-3d {
             position: relative;
             width: 85vw; max-width: 450px;
-            aspect-ratio: 1.6; 
+            aspect-ratio: 1.48; 
             z-index: 10; perspective: 2500px;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.25); border-radius: 4px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25), 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 4px;
         }
 
-        .env-fondo { position: absolute; inset: 0; background: #142412; border-radius: 4px; z-index: 1; }
-        .env-izquierda { position: absolute; inset: 0; z-index: 3; background: #6b8253; clip-path: polygon(0 0, 50% 50%, 0 100%); }
-        .env-derecha { position: absolute; inset: 0; z-index: 3; background: #5c7345; clip-path: polygon(100% 0, 50% 50%, 100% 100%); }
-        .env-abajo { position: absolute; inset: 0; z-index: 4; background: linear-gradient(to top, #4a593d, #6b8253); clip-path: polygon(0 100%, 50% 45%, 100% 100%); filter: drop-shadow(0 -5px 15px rgba(0,0,0,0.15)); }
-        .env-arriba { position: absolute; inset: 0; z-index: 6; background: linear-gradient(to bottom, #8fa078, #6b8253); clip-path: polygon(0 0, 100% 0, 50% 55%); transform-origin: top; transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        /* Textura compartida por las piezas */
+        .capa-verde-png {
+            position: absolute; inset: 0;
+            background-image: url('./imagenes/sobree.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
 
+        /* Cavidad interna del sobre */
+        .env-fondo {
+            position: absolute; inset: 2px;
+            background: linear-gradient(to bottom, rgb(122, 59, 45), rgb(122, 59, 45));
+            border-radius: 4px; z-index: 1;
+            box-shadow: inset 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        /* Nuevos recortes de precisión basados en el pliegue real al 74% */
+        .env-izquierda { z-index: 3; clip-path: polygon(0 0, 50% 74%, 0 100%); filter: drop-shadow(3px 0 5px rgba(0,0,0,0.15)); }
+        .env-derecha { z-index: 3; clip-path: polygon(100% 0, 50% 74%, 100% 100%); filter: drop-shadow(-3px 0 5px rgba(0,0,0,0.15)); }
+        
+        .env-abajo {
+            z-index: 4;
+            clip-path: polygon(0 100%, 0 25%, 50% 74%, 100% 25%, 100% 100%);
+            filter: drop-shadow(0 -8px 15px rgba(0,0,0,0.25));
+        }
+        
+        .env-arriba {
+            z-index: 6;
+            clip-path: polygon(0 0, 100% 0, 100% 25%, 50% 74%, 0 25%);
+            transform-origin: top;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==================================================================
+           5. SELLO DE CERA Y TEXTO (UBICACIÓN EXACTA EN LA PUNTA DE LA V)
+           ================================================================== */
         .texto-presione {
-            position: absolute; top: 36%; left: 50%; transform: translateX(-50%);
+            position: absolute; 
+            top: 45%; /* Subido estratégicamente para que no se pise con la solapa larga */
+            left: 50%; transform: translateX(-50%);
             font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic;
             color: #fff; background: rgba(0, 0, 0, 0.5); padding: 4px 12px; border-radius: 20px;
             z-index: 11; pointer-events: none; animation: latido 2s infinite;
         }
         @keyframes latido { 0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.05); } }
 
-       /* ==================================================================
-   BOTÓN DEL SELLO ("M") - AJUSTE INTELIGENTE PC / CELULAR
-   ================================================================== */
-.sello-btn {
-    position: absolute; 
-    top: 55%; /* Centrado para PC */
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    width: 110px; /* Tamaño elegante para pantallas grandes */
-    height: 110px; 
-    background: transparent; 
-    border: none; 
-    cursor: pointer;
-    z-index: 10; 
-    padding: 0; 
-    transition: transform 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease;
-}
+        .sello-btn {
+            position: absolute; 
+            top: 60%; /* Clavado de forma milimétrica en el nuevo vértice */
+            left: 50%; transform: translate(-50%, -50%);
+            width: 90px; height: 90px; background: transparent; border: none; cursor: pointer;
+            z-index: 10; padding: 0; transition: all 0.3s ease;
+        }
+        .sello-btn img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.35)); }
+        .sello-btn:active { transform: translate(-50%, -50%) scale(0.9); }
 
-.sello-btn img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: contain; 
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); 
-}
-
-.sello-btn:active { 
-    transform: translate(-50%, -50%) scale(0.9); 
-}
-
-/* --- MODO CELULAR: Sello más pequeño y mejor ubicado --- */
-@media (max-width: 767px) {
-    .sello-btn {
-        width: 85px;  /* Lo encogemos para que no tape todo el sobre */
-        height: 85px; 
-        top: 52%;     /* Lo subimos ligeramente para que clave justo en el pico de la V móvil */
-    }
-}
+        /* Ajustes específicos para móviles */
+        @media (max-width: 767px) {
+            .sello-btn { width: 70px; height: 70px; top: 60%; }
+            .texto-presione { top: 45%; font-size: 0.85rem; }
+        }
 
         /* ==================================================================
-           5. TRANSICIÓN DE APERTURA AL HACER CLIC
+           6. TRANSICIONES DE SALIDA Y APERTURA
            ================================================================== */
-        .abierto .sello-btn { opacity: 0; pointer-events: none; }
+        .abierto .sello-btn { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.5); }
         .abierto .texto-presione { opacity: 0; transition: opacity 0.3s; }
-        .abierto .env-arriba { transform: rotateX(180deg); filter: brightness(0.6); }
+        .abierto .env-arriba { transform: rotateX(165deg); filter: brightness(0.55); z-index: 2; }
         
-        .transicion-zoom {
-            transform: scale(2.5); 
-            opacity: 0; 
-            pointer-events: none;
-        }
+        .transicion-zoom { transform: scale(2.5); opacity: 0; pointer-events: none; }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -1348,13 +1320,17 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 </style>
 </head>
 <body>
-<!-- AQUI PONES LA RUTA DE TU CANCIÓN -->
-    <audio id="musica-magdalena" src="./imagenes/audio/campana-yorebabaste.AAC" preload="auto"></audio>
+<!-- CONTROL DE AUDIO LOOP -->
+    <audio id="musica-magdalena" loop>
+        <source src="./imagenes/audio/campana-yorebabaste.AAC" type="audio/mpeg">
+    </audio>
 
+    <!-- PANTALLA INTRODUCTORIA -->
     <div id="pantalla-invitacion">
         
-        <!-- RESPLANDOR Y LUCES MÁGICAS -->
         <div class="resplandor-centro"></div>
+        
+        <!-- LLUVIA DE LUCESITAS -->
         <div class="particula-magica p1"></div>
         <div class="particula-magica p2"></div>
         <div class="particula-magica p3"></div>
@@ -1367,38 +1343,32 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <div class="particula-magica p10"></div>
         <div class="particula-magica p11"></div>
 
-        <div class="particula-magica p8"></div>
-        <div class="particula-magica p9"></div>
-        <div class="particula-magica p10"></div>
-        <div class="particula-magica p11"></div>
-           <div class="particula-magica p8"></div>
-        <div class="particula-magica p9"></div>
-        <div class="particula-magica p10"></div>
-        <div class="particula-magica p11"></div>
-
-        <!-- TEXTOS CON ANIMACIÓN DE ENTRADA -->
+        <!-- TEXTOS -->
         <div class="textos-fiesta">
-            <h2>306 Años de Historia</h2>
+            <h2>¡Feliz 306 Aniversario y Fiesta Patronal!</h2>
             <h1>Magdalena</h1>
             <p>Estás invitado a ser parte de la gran fiesta de nuestro pueblo.</p>
         </div>
 
-        <!-- EL SOBRE 3D -->
+        <!-- SOBRE CONFIGURADO CON TU IMAGEN -->
         <div id="el-sobre" class="sobre-3d">
             <div class="env-fondo"></div>
-            <div class="env-izquierda"></div>
-            <div class="env-derecha"></div>
-            <div class="env-abajo"></div>
-            <div class="env-arriba"></div>
+            
+            <!-- Fragmentos de la imagen cortados en relieve -->
+            <div class="capa-verde-png env-izquierda"></div>
+            <div class="capa-verde-png env-derecha"></div>
+            <div class="capa-verde-png env-abajo"></div>
+            <div class="capa-verde-png env-arriba"></div>
             
             <div class="texto-presione">Presione aquí</div>
 
             <button id="btn-sello" class="sello-btn">
-                <img src="./imagenes/cultura danzas/sello.png" alt="Sello M">
+                <img src="./imagenes/cello.png" alt="Sello M">
             </button>
         </div>
 
     </div>
+
 <!-- NAV -->
 <!-- NAV RESPONSIVE MEJORADO -->
 <nav id="mainNav">
@@ -1483,7 +1453,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
           <p>En este día sagrado, quiero elevar una oración de gratitud por cada familia, por cada comunario, por cada joven y por cada adulto mayor que hace grande a esta tierra. Magdalena no es solo un lugar en el mapa de la Provincia Iténez. Magdalena es historia, es río, es gente trabajadora, es fe que se transmite de generación en generación.</p>
           <p><strong>Querido pueblo de Magdalena:</strong></p>
           <p>Reciban de su alcalde un abrazo fraterno y el compromiso más firme: Trabajar por ustedes, con ustedes y para ustedes.</p>
-          <p>Mi gestión tiene un solo norte: el progreso y el beneficio de cada hogar de esta hermosa tierra itonama. Vamos a seguir abriendo caminos, mejorando la salud, fortaleciendo la educación, apoyando a nuestras familias productoras y emprendedoras, a nuestros pescadores, a nuestros ganaderos y a nuestros artesanos. Porque el desarrollo de Magdalena se construye desde el campo, desde los barrios, desde las riberas del río hasta el último rincón de nuestro Municipio.</p>
+          <p>Mi gestión tiene un solo norte: el progreso y el beneficio de cada hogar de esta hermosa tierra itonama. Vamos a seguir abriendo caminos, mejorando la salud, fortaleciendo la educación, apoyando a nuestras familias productoras y emprendedoras, a nuestros ganaderos, a nuestros agricultores, a nuestros pescadores y a nuestros artesanos. Porque el desarrollo de Magdalena se construye desde el campo, desde los barrios, desde las riberas del río hasta el último rincón de nuestro Municipio.</p>
           <p>Que Santa María Magdalena, ejemplo de fe, de entrega y de transformación, nos inspire a seguir unidos. Que su luz nos recuerde que cuando un pueblo camina junto, ningún desafío es demasiado grande.</p>
           <p><strong>¡Feliz 306 Aniversario y Fiesta Patronal!</strong></p>
           <p>Que esta fiesta nos renueve la esperanza, nos llene de orgullo y nos comprometa a seguir construyendo juntos el Magdalena que todos soñamos: un Magdalena con más oportunidades, con más dignidad y con más futuro para nuestros hijos.</p>
@@ -1571,7 +1541,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 <section class="origen-section" id="origen">
   <div class="section-inner">
     <p class="section-label reveal">Nuestra historia</p>
-    <h2 class="section-title reveal">El origen, aguas abajo del Itonamas</h2>
+    <h2 class="section-title reveal">El origen, aguas abajo del Itonama</h2>
     <p class="section-sub reveal">De reducción jesuítica a capital de la provincia Iténez</p>
     <div class="gold-line reveal"></div>
     <div class="tl reveal">
@@ -1579,7 +1549,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <div class="tl-dot"></div>
         <div class="tl-year">1720</div>
         <h4>La fundación</h4>
-        <p>El padre jesuita Gabriel Ruiz reúne al pueblo Itonama a orillas del río Itonamas y funda, el 22 de julio, la reducción de Santa María Magdalena, una de las Misiones de Moxos.</p>
+        <p>El padre jesuita Gabriel Ruiz reúne al pueblo a orillas del río Itonama y funda, el 22 de julio, la reducción de Santa María Magdalena, una de las Misiones de Moxos.</p>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
@@ -1591,7 +1561,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <div class="tl-dot"></div>
         <div class="tl-year">Hoy</div>
         <h4>Capital de Iténez</h4>
-        <p>Magdalena es la capital de la provincia Iténez, en el Beni: “Tierra de ensueños a las orillas del Itonamas”, que conserva viva su herencia itonama y misional.</p>
+        <p>Magdalena es la capital de la provincia Iténez, en el departamento del Beni: “Tierra de ensueños a las orillas del Itonama”, que conserva viva su herencia misional y cultural.</p>
       </div>
     </div>
     <div class="stats reveal">
@@ -1625,12 +1595,12 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <img src="imagenes/patrona.jpg" alt="Imagen de la Patrona Santa María Magdalena" loading="lazy">
       </div>
       <div class="fe-text reveal-right">
-        <p>Cada julio, Magdalena vive su devoción más honda. Desde el <strong>repique de campanas</strong> y el saludo a la aurora, la <strong>novena a Santa María Magdalena</strong> reúne al pueblo durante nueve días de oración, cantos y procesiones.</p>
+        <p>Cada julio, Magdalena vive su devoción más emotiva, espiritual y tradicional. Desde el <strong>repique de campanas</strong> y el saludo a la aurora, la <strong>novena a Santa María Magdalena</strong> reune al pueblo durante nueve días de oración, cantos, danzas y procesiones.</p>
         <p>La <strong>peregrinación por el río Itonama</strong>, el <strong>Yorebabaste</strong> entonado en su honor y el <strong>velorio de la Patrona</strong> preparan el corazón para el día central: la <strong>solemne misa y procesión del 22 de julio</strong>.</p>
         <div class="fe-points">
           <span class="fe-point">⛪ 9 días de novena</span>
           <span class="fe-point">🔔 Saludo a la aurora</span>
-          <span class="fe-point">🛶 Procesión por el río</span>
+          <span class="fe-point">🛶 Procesión por el río itonama</span>
           <span class="fe-point">✝️ Misa solemne · 22 de julio</span>
         </div>
       </div>
@@ -1715,7 +1685,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         </div>
         <div class="trad-card-content">
           <h4>Los macheteros</h4>
-          <p>Danza emblema del Beni, patrimonio cultural inmaterial. Portan grandes plumajes multicolores y machetes de madera, danzando al ritmo de los bajones y las bombillas nativas.</p>
+          <p>Danza emblema del Beni, patrimonio cultural. Por tan grandes plumajes multicolores y machetes de madera, danzando al ritmo de la bombilla y la flauta nativa.</p>
         </div>
       </div>
 
@@ -1737,7 +1707,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         </div>
         <div class="trad-card-content">
           <h4>Judas Itonamas</h4>
-          <p>Personajes enigmáticos y guardianes de la fe. Durante la Semana Santa, los Judas recorren las calles de Magdalena envueltos en misterio, vistiendo trajes de fibras naturales y máscaras talladas.</p>
+          <p>Personajes enigmáticos y guardianes de la fe. Durante la Semana Santa, los Judas recorren las calles de Magdalena envueltos en misterioso traje rojo, cascabeles, chicote y máscara tallada.</p>
         </div>
       </div>
 
@@ -1748,7 +1718,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         </div>
         <div class="trad-card-content">
           <h4>El palo encebao</h4>
-          <p>Tradición emblemática del Beni: los jóvenes trepan un tronco encerado de 30 metros. Su entrada es el 16 de julio y la parada, a cargo del Cabildo Indigenal, el 22.</p>
+          <p>Tradición emblemática del Beni: los jóvenes trepan un tronco encerado de gran longitud y adornado con valiosos premios. Su entrada al pueblo es el 16 de julio y la parada el 22 al amanecer a cargo del Cabildo Indigenal.</p>
         </div>
       </div>
 
@@ -1759,7 +1729,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         </div>
         <div class="trad-card-content">
           <h4>La ganadería</h4>
-          <p>Pasión del pueblo. Cada julio se vive el remate ASOGAMAG bajo su lema “La ganadería, pasión de pueblo”, junto a carreras de caballos y riñas de gallos.</p>
+          <p>Pasión del pueblo. También se vive el gram remate ganadero ASOGAMAG bajo su lema “La ganadería, pasión del pueblo”, junto a carreras de caballos y riñas de gallos.</p>
         </div>
       </div>
 
@@ -1770,7 +1740,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         </div>
         <div class="trad-card-content">
           <h4>Ciervos y toritos</h4>
-          <p>Los ciervos lucen máscaras de madera con cornamentas de cintas multicolores y los toritos representan la bravura del ganado beniano, al compás de la tamborita y el pífano.</p>
+          <p>Los ciervos lucen máscaras de madera con cornamentas con cintas multicolores y los toritos representan la bravura del ganado beniano, al compás de la bombilla y la flauta.</p>
         </div>
       </div>
 
@@ -1791,37 +1761,37 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
       <div class="gastro-card reveal-scale">
         <img src="./imagenes/gastronomia/camba muerto.png" alt="Camba muerto" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Camba muerto</h4>
-        <p>Plato emblemático con carne seca, arroz, plátano y queso</p>
+        <p>Plato ancestral con carne molida envuelta en hoja de plátano y yuca</p>
       </div>
       
       <div class="gastro-card reveal-scale">
         <img src="./imagenes/gastronomia/patasca.jpg" alt="Patasca" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Patasca</h4>
-        <p>Sopa tradicional con maíz pelado, carne y especias de la región</p>
+        <p>Sopa tradicional con maíz, carne de cabeza y uñas de la res, condimentada con especias de la región</p>
       </div>
       
       <div class="gastro-card reveal-scale">
         <img src="./imagenes/gastronomia/masaco con bife.jpg" alt="Asadito al palo" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Masaco con Bife</h4>
-        <p>Clásico masaco tradicional acompañado de un bife jugoso y en su punto.</p>
+        <p>Clásico masaco tradicional de plátano o yuca, acompañado de un sabroso y jugoso bife de carnet de res.</p>
       </div>
       
       <div class="gastro-card reveal-scale">
         <img src="./imagenes/gastronomia/majadito.jpg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Majadito de Charque</h4>
-        <p>Tradicional arroz sazonado con charque desmenuzado, servido con huevo frito y plátano maduro.</p>
+        <p>Plato elaborado de arroz sazonado con charque desmenuzado, acompañado de huevo estrellado y plátano frito.</p>
       </div>
 
        <div class="gastro-card reveal-scale">
         <img src="./imagenes/gastronomia/locro.jpg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Locro de Gallina</h4>
-        <p>Reconfortante sopa tradicional beniana de gallina criolla con arroz, sazonada con el toque auténtico de nuestra tierra.</p>
+        <p>Sabrosa sopa reconfortante, preparada de gallina criolla con arroz, sazonada con el toque auténtico de nuestra tierra.</p>
       </div>
 
        <div class="gastro-card reveal-scale">
         <img src="./imagenes/gastronomia/sudau.jpg" alt="Majadito y locro" class="gastro-img" onerror="this.src='https://via.placeholder.com/80/F9ECCC/C9982A?text=Foto'">
         <h4>Sudau de Pescado</h4>
-        <p>Tradicional sudado de pescado fresco de la región, cocinado a fuego lento con yuca, plátano y el sazón aromático de nuestra tierra.</p>
+        <p>Se elabora de pirañas sazonada y cocinada a fuego lento y se sirve con arroz y jacuú de yuca sancochada.</p>
       </div>
 
 
@@ -2576,8 +2546,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 pantalla.classList.add('transicion-zoom');
                 setTimeout(() => {
                     pantalla.style.display = 'none';
-                }, 1000);
-            }, 600); 
+                }, 2500);
+            }, 1200); 
         });
     }
 });
