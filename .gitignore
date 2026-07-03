@@ -3,3 +3,10 @@ imagenes/.DS_Store
 .claude/
 Afiche_Magdalena_306.jpg
 Afiche_Magdalena_306.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
