@@ -748,15 +748,34 @@ section{padding:80px 20px}
 .concejo-firma{margin-top:24px;border-top:1px solid rgba(186,163,120,.3);padding-top:18px;text-align:center;max-width:620px;margin-left:auto;margin-right:auto}
 .concejo-firma .nombre{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--forest-dark);letter-spacing:.3px}
 .concejo-firma .sub{font-size:11.5px;color:var(--earth);margin-top:3px;letter-spacing:.5px}
-.concejo-roster{margin-top:26px;padding-top:24px;border-top:1px solid rgba(186,163,120,.3)}
+.concejo-roster{margin-top:22px;padding-top:24px;border-top:1px solid rgba(186,163,120,.3)}
 .concejo-roster h4{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:18px;font-weight:700}
-.roster-grid{display:grid;grid-template-columns:1fr;gap:11px;max-width:640px;margin:0 auto}
-.roster-item{background:linear-gradient(155deg,#fffdf7 0%,#fbf3df 100%);border:1px solid var(--gold-glow);border-radius:13px;padding:13px 16px;text-align:center}
-.roster-item .r-name{font-family:'Playfair Display',serif;font-size:15.5px;font-weight:700;color:var(--forest-dark);line-height:1.25}
-.roster-item .r-role{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--earth);margin-top:4px}
-.roster-item.is-pres{border-color:var(--gold);box-shadow:0 6px 18px rgba(201,152,42,.16)}
-.roster-item.is-pres .r-role{color:var(--gold)}
-@media(min-width:600px){.roster-grid{grid-template-columns:1fr 1fr}.roster-item.is-pres{grid-column:1/-1}}
+.roster-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:640px;margin:0 auto}
+.roster-item{background:linear-gradient(155deg,#fffdf7 0%,#fbf3df 100%);border:1px solid var(--gold-glow);border-radius:13px;padding:12px 12px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.roster-item .r-name{font-family:'Playfair Display',serif;font-size:clamp(13.5px,3.4vw,15.5px);font-weight:700;color:var(--forest-dark);line-height:1.25}
+.roster-item .r-role{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--earth);margin-top:5px}
+.roster-item.is-pres{grid-column:1/-1;border-color:var(--gold);background:linear-gradient(155deg,#fffdf5 0%,var(--gold-light) 100%);box-shadow:0 8px 20px rgba(201,152,42,.18)}
+.roster-item.is-pres .r-name{font-size:clamp(15px,3.8vw,17px)}
+.roster-item.is-pres .r-role{color:var(--gold);font-weight:700}
+.roster-item.is-pres .r-role::before,.roster-item.is-pres .r-role::after{content:'✦';font-size:8px;opacity:.7;margin:0 6px;vertical-align:middle}
+
+/* ==== Mensaje de la Presidencia: desplegable elegante ==== */
+.concejo-msg-block{margin-top:24px;padding-top:22px;border-top:1px solid rgba(186,163,120,.3)}
+.concejo-msg-intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,3.6vw,17px);color:var(--earth);max-width:560px;margin:0 auto 16px;line-height:1.55}
+.msg-toggle{display:inline-flex;align-items:center;gap:11px;margin:0 auto;padding:13px 28px;background:linear-gradient(135deg,var(--forest-dark) 0%,#0f3d20 100%);color:#fff;border:none;border-radius:40px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.4px;cursor:pointer;box-shadow:0 8px 22px rgba(15,61,32,.24);transition:transform .25s ease,box-shadow .25s ease}
+.msg-toggle:hover{transform:translateY(-2px);box-shadow:0 13px 30px rgba(15,61,32,.32)}
+.msg-toggle .mt-icon{font-size:16px;line-height:1}
+.msg-toggle .mt-chevron{font-size:11px;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.concejo-msg-block.open .msg-toggle .mt-chevron{transform:rotate(180deg)}
+.concejo-msg-block.open .mt-label-abrir{display:none}
+.mt-label-cerrar{display:none}
+.concejo-msg-block.open .mt-label-cerrar{display:inline}
+.msg-panel{max-height:0;overflow:hidden;opacity:0;transition:max-height .65s cubic-bezier(.22,1,.36,1),opacity .5s ease,margin-top .45s ease}
+.concejo-msg-block.open .msg-panel{max-height:2400px;opacity:1;margin-top:22px}
+.msg-panel-inner{background:linear-gradient(160deg,#fffdf7 0%,#fbf3df 100%);border:1px solid var(--gold-glow);border-radius:16px;padding:clamp(20px,4vw,32px);text-align:left;position:relative}
+.msg-panel-inner::before{content:'\201C';position:absolute;top:6px;left:18px;font-family:'Playfair Display',serif;font-size:64px;color:var(--gold-glow);line-height:1;opacity:.6}
+.msg-close{display:inline-flex;align-items:center;gap:7px;margin:20px auto 2px;padding:9px 20px;background:transparent;border:1px solid var(--gold);color:var(--forest-dark);border-radius:30px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.5px;cursor:pointer;transition:background .25s ease,color .25s ease}
+.msg-close:hover{background:var(--gold);color:#fff}
 
 /* CRONOGRAMA */
 .crono-section{background:linear-gradient(180deg,var(--forest-light) 0%,var(--cream) 18%)}
@@ -1646,19 +1665,8 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
           <figcaption>Honorable Concejo Municipal de Magdalena · Gestión 2026 – 2031</figcaption>
         </figure>
         <div class="concejo-body">
-          <p class="section-label">Mensaje de la Presidencia</p>
-          <h3>Milka Angulo Paz</h3>
-          <p class="cargo">Presidenta del Honorable Concejo Municipal de Magdalena</p>
-          <hr class="concejo-sep">
-          <div class="concejo-msg">
-            <p>A nombre del Honorable Concejo Municipal, el cual me honro en presidir, me permito hacerles llegar un saludo cordial a mi pueblo pujante, de mujeres y hombres valerosos, en esta fecha histórica en que recordamos con devoción y entusiasmo los <strong>CCCVI años</strong> de fundación de nuestra hermosa ciudad de Magdalena.</p>
-            <p>En la perspectiva constante de lograr el desarrollo integral de nuestro municipio, este nuevo Concejo Municipal desarrollará, durante toda la gestión, una labor de coordinación y apoyo a cada uno de los proyectos del Gobierno Autónomo Municipal, para hacer de Magdalena uno de los municipios más desarrollados de la provincia Iténez, convirtiéndolo en ejemplo de progreso para todo el departamento del Beni.</p>
-            <p>Sabemos lo difícil que es satisfacer todas las necesidades de las comunidades del municipio, pero doblaremos el esfuerzo para alcanzar las metas y objetivos trazados en la presente gestión, a fin de lograr el bienestar del pueblo Itonama.</p>
-            <p>Es así que aprovecho la oportunidad para agradecer a todo el pueblo Itonama y a las comunidades de nuestro municipio, por la confianza depositada en nosotros, recordándoles el firme compromiso de trabajar con esfuerzo y entusiasmo, de manera honesta, eficiente, eficaz y transparente, para lograr los frutos propuestos en nuestro plan de gobierno y mejorar la calidad de vida de nuestra gente.</p>
-            <p>Finalmente, quiero dar la más afectuosa bienvenida a nuestra hermosa ciudad de Magdalena a todos los visitantes que llegan desde los distintos puntos de nuestro país, a fin de participar de los actos programados en conmemoración de nuestra fiesta patronal, pidiendo a todo el pueblo Itonama brindar la calidez humana que nos caracteriza a todas las personas que nos honran con su visita, rogando a nuestro Divino Creador que bendiga y colme de salud a todos los hogares de nuestra amada ciudad de Magdalena.</p>
-          </div>
-          <div class="concejo-roster">
-            <h4>Miembros del Honorable Concejo Municipal</h4>
+          <div class="concejo-roster" style="margin-top:6px;padding-top:0;border-top:0">
+            <h4>Miembros · Gestión 2026 – 2031</h4>
             <div class="roster-grid">
               <div class="roster-item is-pres">
                 <div class="r-name">Milka Angulo Paz</div>
@@ -1682,9 +1690,37 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
               </div>
             </div>
           </div>
-          <div class="concejo-firma">
-            <div class="nombre">Milka Angulo Paz</div>
-            <div class="sub">Presidenta del H. Concejo Municipal de Magdalena · Gestión 2026 – 2031</div>
+
+          <div class="concejo-msg-block" id="concejoMsg">
+            <p class="concejo-msg-intro">La Presidencia del Concejo dirige unas cálidas palabras al pueblo Itonama en este aniversario.</p>
+            <button class="msg-toggle" type="button" aria-expanded="false" aria-controls="concejoMsgPanel" onclick="toggleConcejoMsg(this)">
+              <span class="mt-icon">✉</span>
+              <span class="mt-label-abrir">Leer el mensaje de la Presidenta</span>
+              <span class="mt-label-cerrar">Ocultar el mensaje</span>
+              <span class="mt-chevron">▼</span>
+            </button>
+            <div class="msg-panel" id="concejoMsgPanel">
+              <div class="msg-panel-inner">
+                <p class="section-label" style="text-align:center">Mensaje de la Presidencia</p>
+                <h3 style="text-align:center">Milka Angulo Paz</h3>
+                <p class="cargo" style="text-align:center">Presidenta del Honorable Concejo Municipal de Magdalena</p>
+                <hr class="concejo-sep">
+                <div class="concejo-msg">
+                  <p>A nombre del Honorable Concejo Municipal, el cual me honro en presidir, me permito hacerles llegar un saludo cordial a mi pueblo pujante, de mujeres y hombres valerosos, en esta fecha histórica en que recordamos con devoción y entusiasmo los <strong>CCCVI años</strong> de fundación de nuestra hermosa ciudad de Magdalena.</p>
+                  <p>En la perspectiva constante de lograr el desarrollo integral de nuestro municipio, este nuevo Concejo Municipal desarrollará, durante toda la gestión, una labor de coordinación y apoyo a cada uno de los proyectos del Gobierno Autónomo Municipal, para hacer de Magdalena uno de los municipios más desarrollados de la provincia Iténez, convirtiéndolo en ejemplo de progreso para todo el departamento del Beni.</p>
+                  <p>Sabemos lo difícil que es satisfacer todas las necesidades de las comunidades del municipio, pero doblaremos el esfuerzo para alcanzar las metas y objetivos trazados en la presente gestión, a fin de lograr el bienestar del pueblo Itonama.</p>
+                  <p>Es así que aprovecho la oportunidad para agradecer a todo el pueblo Itonama y a las comunidades de nuestro municipio, por la confianza depositada en nosotros, recordándoles el firme compromiso de trabajar con esfuerzo y entusiasmo, de manera honesta, eficiente, eficaz y transparente, para lograr los frutos propuestos en nuestro plan de gobierno y mejorar la calidad de vida de nuestra gente.</p>
+                  <p>Finalmente, quiero dar la más afectuosa bienvenida a nuestra hermosa ciudad de Magdalena a todos los visitantes que llegan desde los distintos puntos de nuestro país, a fin de participar de los actos programados en conmemoración de nuestra fiesta patronal, pidiendo a todo el pueblo Itonama brindar la calidez humana que nos caracteriza a todas las personas que nos honran con su visita, rogando a nuestro Divino Creador que bendiga y colme de salud a todos los hogares de nuestra amada ciudad de Magdalena.</p>
+                </div>
+                <div class="concejo-firma">
+                  <div class="nombre">Milka Angulo Paz</div>
+                  <div class="sub">Presidenta del H. Concejo Municipal de Magdalena · Gestión 2026 – 2031</div>
+                </div>
+                <div style="text-align:center">
+                  <button class="msg-close" type="button" onclick="cerrarConcejoMsg()">Cerrar mensaje ▲</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2221,7 +2257,11 @@ const DIA_TITULO={
   '19/07':'Remate ASOGAMAG',
   '21/07':'Víspera — Sesión de honor, entrada folclórica y velorio'
 };
-const ABIERTOS_DEFAULT=['22/07'];
+// Solo el día correspondiente a HOY queda expandido. Si hoy no tiene
+// actividades en el programa, todos los días quedan cerrados.
+const _hoy=new Date();
+const _claveHoy=String(_hoy.getDate()).padStart(2,'0')+'/'+String(_hoy.getMonth()+1).padStart(2,'0');
+const ABIERTOS_DEFAULT=[_claveHoy];
 
 /* ===== RENDER ===== */
 const timeline=document.getElementById('timeline');
@@ -2291,6 +2331,19 @@ function buildTimeline(){
 buildTimeline();
 
 function toggleDay(h){h.parentElement.classList.toggle('open');}
+
+/* ===== Mensaje de la Presidencia del Concejo (desplegable) ===== */
+function toggleConcejoMsg(btn){
+  const block=document.getElementById('concejoMsg');
+  const abierto=block.classList.toggle('open');
+  btn.setAttribute('aria-expanded',abierto?'true':'false');
+}
+function cerrarConcejoMsg(){
+  const block=document.getElementById('concejoMsg');
+  block.classList.remove('open');
+  const btn=block.querySelector('.msg-toggle');
+  if(btn){btn.setAttribute('aria-expanded','false');btn.scrollIntoView({behavior:'smooth',block:'center'});}
+}
 function openDay(fecha){
   const b=document.querySelector(`.day-block[data-fecha="${fecha}"]`);
   if(!b)return;
@@ -2585,6 +2638,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // === PAUSA AUTOMÁTICA A 1:25 (solo la primera vez; luego el usuario controla) ===
+    const LIMITE_MUSICA = 85; // 1 min 25 s
+    let musicaAutoPausada = false;
+    if (audio) {
+        audio.addEventListener('timeupdate', () => {
+            if (!musicaAutoPausada && audio.currentTime >= LIMITE_MUSICA) {
+                musicaAutoPausada = true;
+                audio.pause();
+                actualizarInterfazMusica();
+            }
+        });
+    }
+
     // === SONIDOS SINTETIZADOS (Web Audio API — sin archivos) ===
     let actx = null;
     function ac() {
@@ -2666,14 +2732,15 @@ document.addEventListener('DOMContentLoaded', () => {
             introAbierto = true;
             const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            // 1. Música ambiental (gesto del usuario: permitido por el navegador)
-            if (audio) {
-                audio.play().then(actualizarInterfazMusica)
-                    .catch(e => console.log('Audio esperando interacción', e));
+            function reproducirMusica() {
+                if (audio) {
+                    audio.play().then(actualizarInterfazMusica)
+                        .catch(e => console.log('Audio esperando interacción', e));
+                }
             }
 
             // Accesibilidad: sin animaciones, entrada directa
-            if (reduce) { saltarIntro(); return; }
+            if (reduce) { reproducirMusica(); saltarIntro(); return; }
 
             // 2. El lacre se rompe y se desprende
             sonCrack();
@@ -2690,6 +2757,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 pantalla.classList.add('transicion-zoom');
             }, 2450);
             ocultarPantalla(4000);
+
+            // 5. Música ambiental: entra después de los sonidos del sobre, sin pisarlos
+            setTimeout(reproducirMusica, 3000);
         });
     }
 });
