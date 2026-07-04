@@ -1512,7 +1512,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 <body>
 <!-- CONTROL DE AUDIO LOOP (preload=none: no descarga los 2MB hasta que el usuario abre el sobre) -->
     <audio id="musica-magdalena" loop preload="none">
-        <source src="./imagenes/audio/campana-yorebabaste.AAC" type="audio/aac">
+        <source src="./imagenes/audio/campanas-yorebabaste.AAC" type="audio/aac">
     </audio>
 
     <!-- PANTALLA INTRODUCTORIA -->
@@ -2786,7 +2786,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ocultarPantalla(4000);
 
             // 5. Música ambiental: entra después de los sonidos del sobre, sin pisarlos
-            setTimeout(reproducirMusica, 3000);
+           setTimeout(reproducirMusica, 0);
         });
     }
 });
