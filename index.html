@@ -93,6 +93,11 @@
             width: 100vw; height: 100vw; max-width: 800px; max-height: 800px;
             background: radial-gradient(circle, rgba(255, 230, 160, 0.45) 0%, rgba(255, 240, 200, 0.15) 40%, transparent 70%);
             z-index: 1; pointer-events: none;
+            animation: resplandor-respira 7s ease-in-out infinite;
+        }
+        @keyframes resplandor-respira {
+            0%, 100% { opacity: .85; transform: translate(-50%, -50%) scale(1); }
+            50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.07); }
         }
 
        /* ==================================================================
@@ -143,6 +148,70 @@
         }
 
         /* ==================================================================
+           2b. GUIRNALDAS DE BANDERINES (fiesta de plaza, en la paleta oficial)
+           ================================================================== */
+        .guirnalda {
+            position: absolute; top: 0; left: 0; width: 100%;
+            height: clamp(88px, 22vw, 130px);
+            z-index: 3; pointer-events: none;
+            transform-origin: 50% 0;
+            animation: guirnalda-ondea 7s ease-in-out infinite alternate;
+            filter: drop-shadow(0 4px 6px rgba(90, 50, 10, 0.18));
+        }
+        .guirnalda.g-atras {
+            top: 14px; opacity: .5;
+            animation: guirnalda-ondea-atras 8.5s ease-in-out -2.5s infinite alternate;
+        }
+        @keyframes guirnalda-ondea       { from { transform: rotate(.6deg); }           to { transform: rotate(-.6deg); } }
+        @keyframes guirnalda-ondea-atras { from { transform: scaleX(-1) rotate(.7deg); } to { transform: scaleX(-1) rotate(-.7deg); } }
+
+        /* ==================================================================
+           2c. CONFETI ELEGANTE (cae girando, se cruza con las lucesitas)
+           ================================================================== */
+        .confeti {
+            position: absolute; top: -20px; border-radius: 2px;
+            z-index: 2; opacity: 0; pointer-events: none;
+            animation: confeti-cae linear infinite;
+        }
+        @keyframes confeti-cae {
+            0%   { transform: translateY(0) rotateZ(0deg) rotateY(0deg); opacity: 0; }
+            8%   { opacity: .95; }
+            85%  { opacity: .8; }
+            100% { transform: translateY(108vh) rotateZ(var(--giro, 540deg)) rotateY(680deg); opacity: 0; }
+        }
+        .c1  { left: 6%;  width: 7px; height: 12px; background: #C9982A; animation-duration: 10s;   animation-delay: 0s;    --giro: 520deg; }
+        .c2  { left: 14%; width: 6px; height: 10px; background: #2E7D4F; animation-duration: 12s;   animation-delay: 2.5s;  --giro: -480deg; }
+        .c3  { left: 22%; width: 8px; height: 13px; background: #E07A1F; animation-duration: 9.5s;  animation-delay: 1.2s;  --giro: 610deg; }
+        .c4  { left: 31%; width: 6px; height: 11px; background: #F0D48A; animation-duration: 13s;   animation-delay: 3.8s;  --giro: -540deg; }
+        .c5  { left: 40%; width: 7px; height: 12px; background: #1A5730; animation-duration: 11s;   animation-delay: 0.8s;  --giro: 500deg; }
+        .c6  { left: 48%; width: 6px; height: 10px; background: #E3B23C; animation-duration: 10.5s; animation-delay: 4.6s;  --giro: -590deg; }
+        .c7  { left: 57%; width: 8px; height: 13px; background: #E07A1F; animation-duration: 12.5s; animation-delay: 2s;    --giro: 460deg; }
+        .c8  { left: 65%; width: 6px; height: 11px; background: #C9982A; animation-duration: 9s;    animation-delay: 5.4s;  --giro: -620deg; }
+        .c9  { left: 73%; width: 7px; height: 12px; background: #2E7D4F; animation-duration: 11.5s; animation-delay: 1.6s;  --giro: 570deg; }
+        .c10 { left: 81%; width: 6px; height: 10px; background: #F0D48A; animation-duration: 10s;   animation-delay: 3.2s;  --giro: -500deg; }
+        .c11 { left: 89%; width: 8px; height: 13px; background: #C9982A; animation-duration: 12s;   animation-delay: 0.4s;  --giro: 540deg; }
+        .c12 { left: 95%; width: 6px; height: 11px; background: #E07A1F; animation-duration: 9.8s;  animation-delay: 4.2s;  --giro: -560deg; }
+
+        /* ==================================================================
+           2d. DESTELLOS DE CELEBRACIÓN (fuegos artificiales lejanos, muy suaves)
+           ================================================================== */
+        .destello {
+            position: absolute; border-radius: 50%;
+            z-index: 1; opacity: 0; pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 215, 130, 0.55) 0%, rgba(255, 190, 90, 0.18) 45%, transparent 70%);
+            animation: destello-florece 9s ease-in-out infinite;
+        }
+        .d1 { top: 10%; left: 8%;  width: 200px; height: 200px; }
+        .d2 { top: 16%; right: 6%; width: 160px; height: 160px; animation-delay: 3s;
+              background: radial-gradient(circle, rgba(255, 180, 120, 0.5) 0%, rgba(255, 170, 100, 0.15) 45%, transparent 70%); }
+        .d3 { top: 5%;  left: 56%; width: 140px; height: 140px; animation-delay: 6s; }
+        @keyframes destello-florece {
+            0%, 72%, 100% { opacity: 0;  transform: scale(0.3); }
+            78%           { opacity: .85; transform: scale(1); }
+            88%           { opacity: 0;  transform: scale(1.45); }
+        }
+
+        /* ==================================================================
            3. TEXTOS ANIMADOS (ELEGANCIA EN CASCADA Y MÓVIL OPTIMIZADO)
            ================================================================== */
         .textos-fiesta { text-align: center; z-index: 10; margin-bottom: 35px; padding: 0 20px; }
@@ -167,10 +236,11 @@
         .sobre-3d {
             position: relative;
             width: 85vw; max-width: 450px;
-            aspect-ratio: 1.48; 
+            aspect-ratio: 1.48;
             z-index: 10; perspective: 2500px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.25), 0 10px 20px rgba(0,0,0,0.1);
             border-radius: 4px;
+            background: rgb(174, 106, 95);
         }
 
         /* Textura compartida por las piezas */
@@ -183,7 +253,7 @@
 
         /* Cavidad interna del sobre */
         .env-fondo {
-            position: absolute; inset: 2px;
+            position: absolute; inset: 0;
             background: linear-gradient(to bottom, rgb(122, 59, 45), rgb(122, 59, 45));
             border-radius: 4px; z-index: 1;
             box-shadow: inset 0 10px 30px rgba(0,0,0,0.7);
@@ -349,6 +419,8 @@
         @media (prefers-reduced-motion: reduce) {
             .particula-magica, .textos-fiesta h1, .textos-fiesta h2, .textos-fiesta p,
             .texto-presione, .saltar-intro { animation: none !important; opacity: 1; }
+            .guirnalda, .resplandor-centro { animation: none !important; }
+            .confeti, .destello { display: none; }
             #pantalla-invitacion { transition: opacity 0.4s ease; }
         }
 
@@ -470,13 +542,20 @@ nav a:hover, nav a.active {
   
   /* Cabecera elegante exclusiva para celular */
   .nav-mobile-header {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--forest-dark);
     font-size: 17px;
     letter-spacing: 0.6px;
     text-shadow: 0 1px 2px rgba(255,255,255,.7);
+  }
+  .nav-mobile-escudo {
+    height: 26px;
+    width: auto;
+    filter: drop-shadow(0 1px 3px rgba(90,60,10,.3));
   }
   nav.scrolled .nav-mobile-header {
     color: var(--forest-dark);
@@ -1519,7 +1598,54 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
     <div id="pantalla-invitacion">
         
         <div class="resplandor-centro"></div>
-        
+
+        <!-- DESTELLOS DE CELEBRACIÓN (fuegos artificiales lejanos) -->
+        <div class="destello d1"></div>
+        <div class="destello d2"></div>
+        <div class="destello d3"></div>
+
+        <!-- GUIRNALDAS DE BANDERINES CON LUCECITAS -->
+        <svg class="guirnalda g-atras" viewBox="0 0 500 150" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,10 Q250,90 500,25" fill="none" stroke="#B08830" stroke-width="2.2" opacity=".9"/>
+            <circle cx="10" cy="12" r="4" fill="rgba(255,224,150,.4)"/><circle cx="10" cy="12" r="2" fill="#FFE9A8"/>
+            <circle cx="70" cy="30" r="4" fill="rgba(255,224,150,.4)"/><circle cx="70" cy="30" r="2" fill="#FFE9A8"/>
+            <circle cx="130" cy="42" r="4" fill="rgba(255,224,150,.4)"/><circle cx="130" cy="42" r="2" fill="#FFE9A8"/>
+            <circle cx="190" cy="50" r="4" fill="rgba(255,224,150,.4)"/><circle cx="190" cy="50" r="2" fill="#FFE9A8"/>
+            <circle cx="250" cy="54" r="4" fill="rgba(255,224,150,.4)"/><circle cx="250" cy="54" r="2" fill="#FFE9A8"/>
+            <circle cx="310" cy="53" r="4" fill="rgba(255,224,150,.4)"/><circle cx="310" cy="53" r="2" fill="#FFE9A8"/>
+            <circle cx="370" cy="49" r="4" fill="rgba(255,224,150,.4)"/><circle cx="370" cy="49" r="2" fill="#FFE9A8"/>
+            <circle cx="430" cy="40" r="4" fill="rgba(255,224,150,.4)"/><circle cx="430" cy="40" r="2" fill="#FFE9A8"/>
+            <circle cx="490" cy="27" r="4" fill="rgba(255,224,150,.4)"/><circle cx="490" cy="27" r="2" fill="#FFE9A8"/>
+            <polygon points="29,22 51,22 40,53" fill="#1A5730"/>
+            <polygon points="89,36 111,36 100,67" fill="#C9982A"/>
+            <polygon points="149,46 171,46 160,77" fill="#E07A1F"/>
+            <polygon points="209,52 231,52 220,83" fill="#F7E7C3" stroke="#C9982A" stroke-width="1"/>
+            <polygon points="269,54 291,54 280,85" fill="#1A5730"/>
+            <polygon points="329,52 351,52 340,83" fill="#C9982A"/>
+            <polygon points="389,45 411,45 400,76" fill="#E07A1F"/>
+            <polygon points="449,33 471,33 460,64" fill="#F7E7C3" stroke="#C9982A" stroke-width="1"/>
+        </svg>
+        <svg class="guirnalda" viewBox="0 0 500 150" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,10 Q250,90 500,25" fill="none" stroke="#B08830" stroke-width="2.2" opacity=".9"/>
+            <circle cx="10" cy="12" r="4" fill="rgba(255,224,150,.4)"/><circle cx="10" cy="12" r="2" fill="#FFE9A8"/>
+            <circle cx="70" cy="30" r="4" fill="rgba(255,224,150,.4)"/><circle cx="70" cy="30" r="2" fill="#FFE9A8"/>
+            <circle cx="130" cy="42" r="4" fill="rgba(255,224,150,.4)"/><circle cx="130" cy="42" r="2" fill="#FFE9A8"/>
+            <circle cx="190" cy="50" r="4" fill="rgba(255,224,150,.4)"/><circle cx="190" cy="50" r="2" fill="#FFE9A8"/>
+            <circle cx="250" cy="54" r="4" fill="rgba(255,224,150,.4)"/><circle cx="250" cy="54" r="2" fill="#FFE9A8"/>
+            <circle cx="310" cy="53" r="4" fill="rgba(255,224,150,.4)"/><circle cx="310" cy="53" r="2" fill="#FFE9A8"/>
+            <circle cx="370" cy="49" r="4" fill="rgba(255,224,150,.4)"/><circle cx="370" cy="49" r="2" fill="#FFE9A8"/>
+            <circle cx="430" cy="40" r="4" fill="rgba(255,224,150,.4)"/><circle cx="430" cy="40" r="2" fill="#FFE9A8"/>
+            <circle cx="490" cy="27" r="4" fill="rgba(255,224,150,.4)"/><circle cx="490" cy="27" r="2" fill="#FFE9A8"/>
+            <polygon points="29,22 51,22 40,53" fill="#1A5730"/>
+            <polygon points="89,36 111,36 100,67" fill="#C9982A"/>
+            <polygon points="149,46 171,46 160,77" fill="#E07A1F"/>
+            <polygon points="209,52 231,52 220,83" fill="#F7E7C3" stroke="#C9982A" stroke-width="1"/>
+            <polygon points="269,54 291,54 280,85" fill="#1A5730"/>
+            <polygon points="329,52 351,52 340,83" fill="#C9982A"/>
+            <polygon points="389,45 411,45 400,76" fill="#E07A1F"/>
+            <polygon points="449,33 471,33 460,64" fill="#F7E7C3" stroke="#C9982A" stroke-width="1"/>
+        </svg>
+
         <!-- LLUVIA DE LUCESITAS -->
         <div class="particula-magica p1"></div>
         <div class="particula-magica p2"></div>
@@ -1541,6 +1667,20 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <div class="particula-magica p18"></div>
         <div class="particula-magica p19"></div>
         <div class="particula-magica p20"></div>
+
+        <!-- CONFETI ELEGANTE QUE CAE -->
+        <div class="confeti c1"></div>
+        <div class="confeti c2"></div>
+        <div class="confeti c3"></div>
+        <div class="confeti c4"></div>
+        <div class="confeti c5"></div>
+        <div class="confeti c6"></div>
+        <div class="confeti c7"></div>
+        <div class="confeti c8"></div>
+        <div class="confeti c9"></div>
+        <div class="confeti c10"></div>
+        <div class="confeti c11"></div>
+        <div class="confeti c12"></div>
         <!-- TEXTOS -->
         <div class="textos-fiesta">
             <h2>¡Feliz 306 Aniversario y Fiesta Patronal!</h2>
@@ -1586,7 +1726,10 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   <div class="nav-inner">
     
     <!-- Este título solo aparecerá en pantallas de celular -->
-    <div class="nav-mobile-header">Magdalena 2026</div>
+    <div class="nav-mobile-header">
+      <img src="imagenes/escudo.webp" class="nav-mobile-escudo" alt="">
+      <span>Magdalena 2026</span>
+    </div>
     
     <input type="checkbox" id="menu-toggle" class="menu-toggle-cb">
     <label for="menu-toggle" class="menu-icon">
