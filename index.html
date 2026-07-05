@@ -9,10 +9,10 @@
 <!-- Open Graph / vista previa al compartir (WhatsApp/Facebook) — dominio de producción -->
 <link rel="canonical" href="https://magdalena306.nexia-labs.com/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Magdalena 306 · Mes Aniversario y Fiesta Patronal">
+<meta property="og:site_name" content="Gobierno Autónomo Municipal de Magdalena">
 <meta property="og:url" content="https://magdalena306.nexia-labs.com/">
-<meta property="og:title" content="Te esperamos en Magdalena · 306 años de fe y fiesta">
-<meta property="og:description" content="El Gobierno Autónomo Municipal de Magdalena te invita con el corazón a celebrar nuestro Mes Aniversario y la Fiesta Patronal de Santa María Magdalena. ¡Bienvenido a la Tierra de Esperanza!">
+<meta property="og:title" content="Te esperamos en Magdalena · 306 Aniversario y Fiesta Patronal · Julio 2026">
+<meta property="og:description" content="El Gobierno Autónomo Municipal de Magdalena te invita a celebrar el Mes Aniversario y la Fiesta Patronal de Santa María Magdalena. Mirá el programa completo de julio. ¡Bienvenido a la Tierra de Esperanza!">
 <meta property="og:image" content="https://magdalena306.nexia-labs.com/imagenes/og-fiesta-magdalena.jpg">
 <meta property="og:image:secure_url" content="https://magdalena306.nexia-labs.com/imagenes/og-fiesta-magdalena.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -21,8 +21,8 @@
 <meta property="og:image:alt" content="Danzas típicas y palo encebao en la Fiesta Patronal de Santa María Magdalena, con la iglesia al fondo">
 <meta property="og:locale" content="es_BO">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Te esperamos en Magdalena · 306 años de fe y fiesta">
-<meta name="twitter:description" content="El Gobierno Autónomo Municipal de Magdalena te invita con el corazón a celebrar nuestro Mes Aniversario y la Fiesta Patronal de Santa María Magdalena. ¡Bienvenido a la Tierra de Esperanza!">
+<meta name="twitter:title" content="Te esperamos en Magdalena · 306 Aniversario y Fiesta Patronal · Julio 2026">
+<meta name="twitter:description" content="El Gobierno Autónomo Municipal de Magdalena te invita a celebrar el Mes Aniversario y la Fiesta Patronal de Santa María Magdalena. Mirá el programa completo de julio. ¡Bienvenido a la Tierra de Esperanza!">
 <meta name="twitter:image" content="https://magdalena306.nexia-labs.com/imagenes/og-fiesta-magdalena.jpg">
 <meta name="theme-color" content="#0E3A1F">
 
@@ -853,8 +853,6 @@ section{padding:80px 20px}
 .roster-item .r-role{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--earth);margin-top:5px}
 .roster-item.is-pres{grid-column:1/-1;border-color:var(--gold);background:linear-gradient(155deg,#fffdf5 0%,var(--gold-light) 100%);box-shadow:0 8px 20px rgba(201,152,42,.18)}
 .roster-item.is-pres .r-name{font-size:clamp(15px,3.8vw,17px)}
-.roster-item.is-pres .r-role{color:var(--gold);font-weight:700}
-.roster-item.is-pres .r-role::before,.roster-item.is-pres .r-role::after{content:'✦';font-size:8px;opacity:.7;margin:0 6px;vertical-align:middle}
 
 /* ==== Mensaje de la Presidencia: desplegable elegante ==== */
 .concejo-msg-block{margin-top:24px;padding-top:22px;border-top:1px solid rgba(186,163,120,.3)}
@@ -1929,7 +1927,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   <img src="imagenes/igleisa-flores.jpg" alt="Iglesia de Magdalena con alfombra de flores de tajibo" loading="lazy">
   <div class="imgband-cap">
     <h3>Tiempo de tajibos en flor</h3>
-    <p>Julio viste de color la plaza y el templo</p>
+    <p>Anuncian la fiesta patronal</p>
   </div>
 </div>
 
@@ -1965,7 +1963,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   <div class="section-inner">
     <p class="section-label reveal">Mapa de sedes</p>
     <h2 class="section-title reveal">¿Dónde es cada acto?</h2>
-    <p class="mapa-hint reveal">Vista aérea de Magdalena. Toca una sede para ubicarla en el mapa; el ícono ↗ la abre en Google Maps.</p>
+    <p class="mapa-hint reveal">Vista aérea de Magdalena. Toca una sede para ubicarla en el mapa.</p>
     <div class="gold-line reveal"></div>
     <div class="mapa-wrap reveal">
       <div class="mapa-canvas"><div id="map"></div></div>
@@ -2446,7 +2444,7 @@ const VENUES={
   rio:{n:'Río Itonama',c:[-13.263420489845483, -64.04827332317609]},
   remate:{n:'Centro de remate · ASOGAMAG',c:[-13.267343890314358, -64.06514869686072]},
   haras:{n:'Haras San Pedro',c:[-13.24600,-64.05010]},
-  cabildo:{n:'Cabildo Indigenal',c:[-13.25620,-64.05850]}
+  cabildo:{n:'Cabildo Indigenal',c:[-13.264993,-64.053514]}
 };
 const VENUE_ORDER=['plaza','parroquia','coliseo_central','coliseo_tinglado','coliseo_grande','centro_cultural','rio','remate','haras','cabildo'];
 const LUGAR_MAP={'Parroquia':'parroquia','Plaza Principal':'plaza','Río Itonama':'rio','Coliseo tinglado':'coliseo_tinglado','Coliseo central':'coliseo_central','Coliseo Grande':'coliseo_grande','Centro cultural':'centro_cultural','Centro Cultural':'centro_cultural','Cabildo':'cabildo','Centro de remate':'remate','Haras San Pedro':'haras'};
@@ -2757,8 +2755,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB();});
 
 /* ===== COMPARTIR ===== */
 function shareURL(){return window.location.href;}
-const shareText='🎉 ¡Te esperamos en Magdalena! El Gobierno Autónomo Municipal te invita con el corazón a celebrar los 306 años y la Fiesta Patronal de Santa María Magdalena — Julio 2026. ¡Bienvenido a la Tierra de Esperanza! 👉 Mirá el programa completo:';
-function shareWhatsApp(){window.open('https://wa.me/?text='+encodeURIComponent(shareText+' '+shareURL()),'_blank');}
+const shareText='El Gobierno Autónomo Municipal de Magdalena te invita al Mes Aniversario y la Fiesta Patronal de Santa María Magdalena — Julio 2026.\n📅 Mirá el programa completo, la agenda día por día y agendá los eventos:';
+function shareWhatsApp(){window.open('https://wa.me/?text='+encodeURIComponent(shareText+'\n👉 '+shareURL()+'\n¡Bienvenido a la Tierra de Esperanza!'),'_blank');}
 function shareFacebook(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(shareURL()),'_blank');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function copyLink(){
