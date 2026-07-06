@@ -2404,16 +2404,20 @@ const EVENTOS=[
   ['22/07','Mié','06:00','Parada del palo encebao a cargo del Cabildo Indigenal y pueblo','Cabildo','tradicion',true],
   ['22/07','Mié','09:00','Solemne misa en honor a la Patrona Santa María Magdalena','Parroquia','religioso',true],
   ['22/07','Mié','10:00','Solemne procesión con la imagen de la Patrona','Parroquia','religioso',true],
+  ['22/07','Mié','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',true],
   ['22/07','Mié','20:00','Verbena popular','Plaza Principal','cultural',true],
   ['23/07','Jue','06:00','Repique de campanas: 2.º día de fiesta patronal','Parroquia','religioso',false],
   ['23/07','Jue','09:00','Misa en honor a la Patrona','Parroquia','religioso',false],
   ['23/07','Jue','10:00','Procesión con la imagen de Santa María Magdalena','Parroquia','religioso',false],
+  ['23/07','Jue','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',false],
   ['23/07','Jue','19:00','Junte de promociones','Centro cultural','cultural',false],
   ['24/07','Vie','06:00','Repique de campanas: 3.er día de fiesta patronal','Parroquia','religioso',false],
   ['24/07','Vie','09:00','Misa en honor a la Patrona','Parroquia','religioso',false],
   ['24/07','Vie','10:00','Procesión con la imagen de Santa María Magdalena','Parroquia','religioso',false],
+  ['24/07','Vie','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',false],
   ['29/07','Mié','05:00','Saludo a la aurora: novena de la fiesta patronal','Parroquia','religioso',false],
-  ['29/07','Mié','09:00','Solemne misa de cierre en honor a la Patrona','Parroquia','religioso',false]
+  ['29/07','Mié','09:00','Solemne misa de cierre en honor a la Patrona','Parroquia','religioso',false],
+  ['29/07','Mié','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',false]
 ];
 const MESES={'06':'Junio','07':'Julio'};
 const DIAS={Lun:'Lunes',Mar:'Martes',Mié:'Miércoles',Jue:'Jueves',Vie:'Viernes',Sáb:'Sábado',Dom:'Domingo'};
@@ -2445,10 +2449,11 @@ const VENUES={
   rio:{n:'Río Itonama',c:[-13.263420489845483, -64.04827332317609]},
   remate:{n:'Centro de remate · ASOGAMAG',c:[-13.267343890314358, -64.06514869686072]},
   haras:{n:'Haras San Pedro',c:[-13.24600,-64.05010]},
-  cabildo:{n:'Cabildo Indigenal',c:[-13.264993,-64.053514]}
+  cabildo:{n:'Cabildo Indigenal',c:[-13.264993,-64.053514]},
+  corral:{n:'Corral',c:[-13.266766,-64.053096]}
 };
-const VENUE_ORDER=['plaza','parroquia','coliseo_central','coliseo_tinglado','coliseo_grande','centro_cultural','rio','remate','haras','cabildo'];
-const LUGAR_MAP={'Parroquia':'parroquia','Plaza Principal':'plaza','Río Itonama':'rio','Coliseo tinglado':'coliseo_tinglado','Coliseo central':'coliseo_central','Coliseo Grande':'coliseo_grande','Centro cultural':'centro_cultural','Centro Cultural':'centro_cultural','Cabildo':'cabildo','Centro de remate':'remate','Haras San Pedro':'haras'};
+const VENUE_ORDER=['plaza','parroquia','coliseo_central','coliseo_tinglado','coliseo_grande','centro_cultural','rio','remate','haras','cabildo','corral'];
+const LUGAR_MAP={'Parroquia':'parroquia','Plaza Principal':'plaza','Río Itonama':'rio','Coliseo tinglado':'coliseo_tinglado','Coliseo central':'coliseo_central','Coliseo Grande':'coliseo_grande','Centro cultural':'centro_cultural','Centro Cultural':'centro_cultural','Cabildo':'cabildo','Centro de remate':'remate','Haras San Pedro':'haras','Corral':'corral'};
 const gmapsURL=name=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name+', Magdalena, Beni, Bolivia')}`;
 const pinSvg='<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 
