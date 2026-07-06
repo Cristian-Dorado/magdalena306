@@ -32,7 +32,7 @@ body{font-family:'Inter',sans-serif;background:#dcd7c8;display:flex;flex-directi
   background:
     radial-gradient(120% 60% at 50% -6%, rgba(255,255,255,.45), transparent 60%),
     linear-gradient(180deg,#F0B36A 0%,#F3C589 16%,#FADFB6 34%,#FBE9CF 52%,#FAF1DC 70%,var(--cream) 88%);
-  padding:46px 52px 34px;
+  padding:28px 34px 26px;
   display:flex; flex-direction:column; align-items:center;
   color:var(--forest-dark);
   box-shadow:0 30px 80px rgba(60,40,10,.28);
@@ -47,27 +47,37 @@ body{font-family:'Inter',sans-serif;background:#dcd7c8;display:flex;flex-directi
 .af-corner.bl{bottom:12px;left:12px;border-right:0;border-top:0;border-bottom-left-radius:4px}
 .af-corner.br{bottom:12px;right:12px;border-left:0;border-top:0;border-bottom-right-radius:4px}
 
-/* Encabezado */
-.af-escudo{width:78px;height:78px;object-fit:contain;margin-bottom:8px;filter:drop-shadow(0 4px 14px rgba(180,120,40,.35))}
-.af-gobierno{font-size:10.5px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(14,58,31,.62);margin-bottom:4px;font-weight:600}
-.af-title{font-family:'Playfair Display',serif;font-size:62px;font-weight:700;color:var(--forest-dark);line-height:.95;letter-spacing:.5px}
-.af-year-row{display:flex;align-items:baseline;gap:9px;margin-top:2px}
-.af-num{font-family:'Playfair Display',serif;font-size:46px;font-weight:700;color:var(--orange)}
-.af-word{font-family:'Playfair Display',serif;font-size:30px;font-weight:400;color:var(--forest-dark)}
-.af-lema{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;color:var(--orange-dark);margin-top:4px}
-.af-sub{font-size:12.5px;letter-spacing:2px;color:rgba(14,58,31,.6);margin-top:8px;text-transform:uppercase}
-.af-line{width:90px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px 0 0}
+/* Marca de agua — la Patrona (arriba) y la iglesia (abajo) */
+.af-watermark{position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+.wm-patrona{position:absolute; left:50%; top:2%; transform:translateX(-50%); width:52%; height:auto; opacity:.20; filter:sepia(.28) saturate(1.25) contrast(1.03);
+  -webkit-mask-image:radial-gradient(closest-side, #000 52%, transparent 86%); mask-image:radial-gradient(closest-side, #000 52%, transparent 86%)}
+.wm-iglesia{position:absolute; left:50%; bottom:-185px; transform:translateX(-50%); width:118%; height:auto; opacity:.18; filter:sepia(.22) saturate(1.25) contrast(1.02);
+  -webkit-mask-image:linear-gradient(180deg, transparent 2%, #000 40%); mask-image:linear-gradient(180deg, transparent 2%, #000 40%)}
+
+/* Contenido por encima de la marca de agua */
+.af-content{position:relative; z-index:1; width:100%; flex:1; display:flex; flex-direction:column; align-items:center}
+
+/* Encabezado tipográfico */
+.af-escudo{width:74px;height:74px;object-fit:contain;margin-bottom:8px;filter:drop-shadow(0 4px 14px rgba(180,120,40,.35))}
+.af-gobierno{font-size:10.5px;letter-spacing:3.2px;text-transform:uppercase;color:rgba(14,58,31,.64);margin-bottom:5px;font-weight:600}
+.af-title{font-family:'Playfair Display',serif;font-size:60px;font-weight:700;color:var(--forest-dark);line-height:.95;letter-spacing:.5px}
+.af-year-row{display:flex;align-items:baseline;gap:9px;margin-top:3px}
+.af-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--orange)}
+.af-word{font-family:'Playfair Display',serif;font-size:29px;font-weight:400;color:var(--forest-dark)}
+.af-lema{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--orange-dark);margin-top:5px}
+.af-sub{font-size:12px;letter-spacing:2px;color:rgba(14,58,31,.6);margin-top:8px;text-transform:uppercase}
+.af-line{width:90px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:13px 0 0}
 
 /* Invitación (tono carta) */
 .af-invite{font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.5;text-align:center;color:#3a3a30;max-width:620px;margin:16px auto 0}
 .af-invite strong{color:var(--forest-dark);font-weight:600}
 
 /* Eventos destacados */
-.af-eventos{width:100%;margin-top:18px}
-.af-eventos h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--forest-dark);margin-bottom:11px;text-align:center;letter-spacing:.5px}
+.af-eventos{width:100%;margin-top:14px}
+.af-eventos h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--forest-dark);margin-bottom:9px;text-align:center;letter-spacing:.5px}
 .af-eventos h3 span{color:var(--gold)}
 .af-ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.af-ev{background:rgba(255,255,255,.72);border:1px solid rgba(201,152,42,.28);border-radius:11px;padding:9px 12px;display:flex;gap:11px;align-items:center;box-shadow:0 2px 8px rgba(120,90,20,.06)}
+.af-ev{background:rgba(255,255,255,.72);border:1px solid rgba(201,152,42,.28);border-radius:11px;padding:8px 11px;display:flex;gap:11px;align-items:center;box-shadow:0 2px 8px rgba(120,90,20,.06)}
 .af-ev-date{text-align:center;min-width:38px;flex-shrink:0}
 .af-ev-date .d{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--orange);line-height:1}
 .af-ev-date .m{font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-dark);font-weight:600}
@@ -75,17 +85,15 @@ body{font-family:'Inter',sans-serif;background:#dcd7c8;display:flex;flex-directi
 .af-ev-info h4{font-size:11.5px;font-weight:600;color:var(--forest-dark);margin-bottom:2px;line-height:1.25}
 .af-ev-info p{font-size:9.5px;color:rgba(14,58,31,.55)}
 
-/* Pie */
-.af-bottom{margin-top:auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:16px}
-.af-qr-block{text-align:center;flex-shrink:0}
-.af-qr{width:150px;height:150px;object-fit:contain;border-radius:14px;border:1.5px solid rgba(201,152,42,.4);background:#fff;padding:6px;box-shadow:0 6px 18px rgba(120,90,20,.14)}
-.af-qr-label{font-size:10.5px;font-weight:700;color:var(--gold-dark);margin-top:8px;letter-spacing:.4px}
-.af-qr-url{font-size:10px;color:var(--forest);margin-top:2px;font-weight:600}
-.af-alcalde{text-align:right;flex:1}
-.af-alcalde .firma-linea{width:150px;height:1px;background:rgba(14,58,31,.35);margin:0 0 6px auto}
-.af-alcalde .nombre{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--forest-dark)}
-.af-alcalde .cargo{font-size:10.5px;letter-spacing:.4px;color:var(--gold-dark);font-weight:600;margin-top:1px}
-.af-alcalde .lugar{font-size:9.5px;color:rgba(14,58,31,.5);margin-top:9px;line-height:1.5}
+/* Pie — QR protagonista + mención institucional */
+.af-bottom{margin-top:auto;width:100%;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:14px}
+.af-qr{width:170px;height:170px;object-fit:contain;border-radius:16px;border:2px solid rgba(201,152,42,.5);background:#fff;padding:9px;box-shadow:0 10px 26px rgba(120,90,20,.2)}
+.af-qr-label{font-size:12px;font-weight:700;color:var(--gold-dark);margin-top:11px;letter-spacing:.3px}
+.af-qr-url{font-size:13px;color:var(--forest);margin-top:2px;font-weight:700;letter-spacing:.3px}
+.af-gestion-line{width:190px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,152,42,.5),transparent);margin:14px 0 10px}
+.af-gestion{font-size:12px;color:var(--forest-dark);font-weight:500}
+.af-gestion strong{font-family:'Playfair Display',serif;font-weight:700;color:var(--forest-dark)}
+.af-gestion-sub{font-size:10px;color:rgba(14,58,31,.55);margin-top:3px;letter-spacing:.3px}
 
 .af-footer-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,152,42,.45),transparent);margin:14px 0 8px}
 .af-hashtag{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold-dark);text-align:center;font-style:italic}
@@ -114,6 +122,12 @@ body{font-family:'Inter',sans-serif;background:#dcd7c8;display:flex;flex-directi
   <span class="af-corner tl"></span><span class="af-corner tr"></span>
   <span class="af-corner bl"></span><span class="af-corner br"></span>
 
+  <div class="af-watermark">
+    <img class="wm-patrona" src="imagenes/patrona.jpg" alt="">
+    <img class="wm-iglesia" src="imagenes/igleisa-flores.jpg" alt="">
+  </div>
+
+  <div class="af-content">
   <img src="imagenes/escudo.webp" class="af-escudo" alt="Escudo de Magdalena">
   <p class="af-gobierno">Gobierno Autónomo Municipal de Magdalena</p>
   <h1 class="af-title">Magdalena</h1>
@@ -168,22 +182,18 @@ body{font-family:'Inter',sans-serif;background:#dcd7c8;display:flex;flex-directi
   </div>
 
   <div class="af-bottom">
-    <div class="af-qr-block">
-      <img src="imagenes/qr-invitacion.png" class="af-qr" alt="Código QR — Invitación digital de Magdalena">
-      <p class="af-qr-label">Escanea para ver el programa completo</p>
-      <p class="af-qr-url">magdalena306.nexia-labs.com</p>
-    </div>
-    <div class="af-alcalde">
-      <div class="firma-linea"></div>
-      <p class="nombre">Dr. Jorge Ribera Paz</p>
-      <p class="cargo">Alcalde Municipal · Gestión 2026 – 2031</p>
-      <p class="lugar">Capital de la Provincia Iténez — Beni<br>Estado Plurinacional de Bolivia</p>
-    </div>
+    <img src="imagenes/qr-invitacion.png" class="af-qr" alt="Código QR — Invitación digital de Magdalena">
+    <p class="af-qr-label">Escanea el código para ver el programa completo</p>
+    <p class="af-qr-url">magdalena306.nexia-labs.com</p>
+    <div class="af-gestion-line"></div>
+    <p class="af-gestion"><strong>Dr. Jorge Ribera Paz</strong> · Alcalde Municipal 2026 – 2031</p>
+    <p class="af-gestion-sub">Capital de la Provincia Iténez — Beni · Bolivia</p>
   </div>
 
   <div class="af-footer-line"></div>
   <p class="af-hashtag">Quien viene una vez a Magdalena, vuelve siempre</p>
   <p class="af-credit">#Magdalena306 · #TierraDeEsperanza · Invitación digital interactiva en el código QR</p>
+  </div>
 </div>
 
 <script>
