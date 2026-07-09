@@ -738,7 +738,7 @@ nav a:hover, nav a.active {
 @media(max-width:820px){
 .hero{min-height:100svh;justify-content:flex-end}
 .hero-portada{inset:0}
-.hero-portada::before{content:'';position:absolute;inset:0;z-index:-1;background:url('imagenes/portada-resplandor.jpg') center top/cover no-repeat;filter:blur(28px) saturate(1.18) brightness(.8);transform:scale(1.3)}
+.hero-portada::before{content:'';position:absolute;inset:0;z-index:-1;background:url('imagenes/portada-vestido-blanco.jpg') center top/cover no-repeat;filter:blur(28px) saturate(1.18) brightness(.8);transform:scale(1.3)}
 .hero-portada img{position:relative;z-index:0;width:100%;height:100%;max-width:none;object-fit:contain;object-position:center 46px}
 .hero-layout{padding:0 16px 88px}
 .scroll-hint{bottom:30px}
@@ -919,8 +919,19 @@ section{padding:80px 20px}
 .day-meta h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:500;color:#2c2c2a;margin-bottom:3px}
 .day-meta p{font-size:12px;color:var(--earth)}
 .day-meta .badge-star{display:inline-block;font-size:10px;color:var(--orange-dark);font-weight:700;margin-left:6px}
-.day-chevron{flex-shrink:0;color:var(--gold);font-size:16px;transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.day-block.open .day-chevron{transform:rotate(180deg)}
+/* Botón explícito "Ver actividades" — señal clara de que el día se despliega */
+.day-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:100px;background:linear-gradient(90deg,var(--gold),var(--orange));color:#fff;font-size:12px;font-weight:700;letter-spacing:.2px;box-shadow:0 4px 12px rgba(180,120,40,.25);transition:all .25s;white-space:nowrap}
+.day-header:hover .day-btn{transform:translateY(-1px);box-shadow:0 6px 16px rgba(180,120,40,.38)}
+.day-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.day-btn .db-ocultar{display:none}
+.day-block.open .day-btn{background:#fff;color:var(--gold-dark);box-shadow:inset 0 0 0 1.5px var(--gold)}
+.day-block.open .day-btn .db-ver{display:none}
+.day-block.open .day-btn .db-ocultar{display:inline}
+.day-block.open .day-btn svg{transform:rotate(180deg)}
+@media(max-width:600px){
+  .day-header{flex-wrap:wrap;padding:14px 16px}
+  .day-btn{flex:1 1 100%;justify-content:center;margin-top:10px;padding:12px 15px;font-size:13px}
+}
 .day-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.22,1,.36,1)}
 .day-block.open .day-body{max-height:2600px}
 .activity{display:flex;gap:14px;padding:13px 20px 13px 22px;border-top:1px solid rgba(0,0,0,.05);align-items:flex-start;position:relative;transition:background .2s}
@@ -1584,6 +1595,25 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
   0%, 100% { box-shadow: 0 0 0 0 rgba(201, 152, 42, 0.6); }
   50% { box-shadow: 0 0 0 12px rgba(201, 152, 42, 0); }
 }
+
+/* ===== GUÍA INTERACTIVA (tour de bienvenida) Y BOTÓN DE AYUDA ===== */
+.ayuda-flotante{position:fixed !important;bottom:25px;left:20px;width:48px;height:48px;background:var(--forest-dark);color:#fff;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.3);cursor:pointer;z-index:999999 !important;transition:all .3s ease;opacity:.9;-webkit-transform:translateZ(0)}
+.ayuda-flotante:hover{transform:scale(1.1);opacity:1}
+@media(max-width:768px){.ayuda-flotante{bottom:35px;left:15px}}
+#tourOverlay{position:fixed;inset:0;z-index:1000000;display:none}
+#tourOverlay.activo{display:block}
+#tourSpot{position:fixed;border-radius:16px;box-shadow:0 0 0 9999px rgba(15,25,15,.62),0 0 0 3px var(--gold);transition:all .45s cubic-bezier(.22,1,.36,1);pointer-events:none}
+#tourCard{position:fixed;max-width:330px;width:calc(100vw - 40px);background:#FFFDF7;border:1px solid var(--gold-glow);border-radius:18px;padding:20px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35);transition:all .45s cubic-bezier(.22,1,.36,1)}
+#tourCard .tc-paso{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:6px}
+#tourCard h4{font-family:'Playfair Display',serif;font-size:19px;color:var(--forest-dark);margin-bottom:8px}
+#tourCard p{font-size:13.5px;line-height:1.6;color:#555;margin-bottom:14px}
+#tourCard .tc-dots{display:flex;gap:5px;margin-bottom:14px}
+#tourCard .tc-dots span{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.12)}
+#tourCard .tc-dots span.on{background:var(--gold)}
+#tourCard .tc-botones{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#tourCard .tc-saltar{background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:#999;cursor:pointer;padding:8px 4px;text-decoration:underline}
+#tourCard .tc-next{border:none;background:linear-gradient(90deg,var(--gold),var(--orange));color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:11px 22px;border-radius:100px;cursor:pointer;box-shadow:0 4px 12px rgba(180,120,40,.35);transition:transform .2s}
+#tourCard .tc-next:hover{transform:translateY(-1px)}
 </style>
 </head>
 <body>
@@ -1773,7 +1803,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
     </div>
   </div>
   <div class="hero-portada">
-    <img src="imagenes/portada-resplandor.jpg" alt="Magdalena 306 Aniversario — Santa María Magdalena, Patrona">
+    <img src="imagenes/portada-vestido-blanco.jpg" alt="Magdalena 306 Aniversario — Santa María Magdalena, Patrona">
   </div>
   <div class="scroll-hint">
     <p class="scroll-text">Desliza para navegar el río</p>
@@ -2205,7 +2235,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <div class="ausp-details">
           <h4>Salsa Itonama del Tío Oscar</h4>
           <p class="ausp-desc">El toque perfecto para tus parrilladas y choripanes. ¡Sabor único y tradicional hecho con pasión beniana!</p>
-          <a href="https://wa.me/59167274244?text=Hola!%20Vi%20su%20publicidad%20en%20la%20invitaci%C3%B3n%20web%20de%20Magdalena." target="_blank" class="ausp-btn-wa">
+          <a href="https://wa.me/59172840888?text=Hola!%20Vi%20su%20publicidad%20en%20la%20invitaci%C3%B3n%20web%20de%20Magdalena." target="_blank" class="ausp-btn-wa">
           <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.688-1.48-1.538-1.653-1.835-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
            Hacer pedido
         </a>
@@ -2403,24 +2433,24 @@ const EVENTOS=[
   ['21/07','Mar','21:00','Fiesta social y coronación de la MIPI’ICA y TIYAYA’CHA','Centro Cultural','cultural',true],
   ['21/07','Mar','22:00','Retreta y velorio de la Patrona Santa María Magdalena','Parroquia','religioso',true],
   ['22/07','Mié','05:00','Saludo a la aurora con repique en honor a la Patrona','Parroquia','religioso',true],
-  ['22/07','Mié','06:00','Parada del palo encebao a cargo del Cabildo Indigenal y pueblo','Corral','tradicion',true],
+  ['22/07','Mié','06:00','Parada del palo encebao a cargo del Cabildo Indigenal y pueblo','Corral Cordón','tradicion',true],
   ['22/07','Mié','09:30','Solemne misa en honor a la Patrona Santa María Magdalena','Parroquia','religioso',true],
   ['22/07','Mié','10:30','Solemne procesión con la imagen de la Patrona','Parroquia','religioso',true],
-  ['22/07','Mié','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',true],
+  ['22/07','Mié','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral Cordón','tradicion',true],
   ['22/07','Mié','20:00','Verbena popular','Plaza Principal','cultural',true],
   ['23/07','Jue','06:00','Repique de campanas: 2.º día de fiesta patronal','Parroquia','religioso',false],
   ['23/07','Jue','09:30','Solemne misa en honor a la Patrona','Parroquia','religioso',false],
   ['23/07','Jue','10:30','Procesión con la imagen de Santa María Magdalena','Parroquia','religioso',false],
-  ['23/07','Jue','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',false],
+  ['23/07','Jue','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral Cordón','tradicion',false],
   ['23/07','Jue','19:00','Junte de promociones','Centro cultural','cultural',false],
   ['24/07','Vie','06:00','Repique de campanas: 3.er día de fiesta patronal','Parroquia','religioso',false],
   ['24/07','Vie','09:30','Solemne misa en honor a la Patrona','Parroquia','religioso',false],
   ['24/07','Vie','10:30','Solemne procesión con la imagen de la Patrona','Parroquia','religioso',false],
-  ['24/07','Vie','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',false],
-  ['24/07','Vie','15:30','Carrera de sortijas','Corral','tradicion',false],
+  ['24/07','Vie','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral Cordón','tradicion',false],
+  ['24/07','Vie','15:30','Carrera de sortijas','Corral Cordón','tradicion',false],
   ['29/07','Mié','05:00','Saludo a la aurora y repique en honor a la fiesta patronal','Parroquia','religioso',false],
   ['29/07','Mié','09:00','Solemne misa en honor a la Patrona','Parroquia','religioso',false],
-  ['29/07','Mié','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral','tradicion',false]
+  ['29/07','Mié','15:00','Jocheo de toros a cargo del Cabildo Indigenal','Corral Cordón','tradicion',false]
 ];
 const MESES={'06':'Junio','07':'Julio'};
 const DIAS={Lun:'Lunes',Mar:'Martes',Mié:'Miércoles',Jue:'Jueves',Vie:'Viernes',Sáb:'Sábado',Dom:'Domingo'};
@@ -2454,10 +2484,10 @@ const VENUES={
   remate:{n:'Centro de remate · ASOGAMAG',c:[-13.267343890314358, -64.06514869686072]},
   haras:{n:'Haras San Pedro',c:[-13.24600,-64.05010]},
   cabildo:{n:'Cabildo Indigenal',c:[-13.264993,-64.053514]},
-  corral:{n:'Corral',c:[-13.266766,-64.053096]}
+  corral:{n:'Corral Cordón',c:[-13.266766,-64.053096]}
 };
 const VENUE_ORDER=['plaza','parroquia','coliseo_central','coliseo_tinglado','coliseo_grande','centro_cultural','rio','remate','haras','cabildo','corral'];
-const LUGAR_MAP={'Parroquia':'parroquia','Plaza Principal':'plaza','Río Itonama':'rio','Coliseo tinglado':'coliseo_tinglado','Coliseo central':'coliseo_central','Coliseo Grande':'coliseo_grande','Centro cultural':'centro_cultural','Centro Cultural':'centro_cultural','Cabildo':'cabildo','Centro de remate':'remate','Haras San Pedro':'haras','Corral':'corral'};
+const LUGAR_MAP={'Parroquia':'parroquia','Plaza Principal':'plaza','Río Itonama':'rio','Coliseo tinglado':'coliseo_tinglado','Coliseo central':'coliseo_central','Coliseo Grande':'coliseo_grande','Centro cultural':'centro_cultural','Centro Cultural':'centro_cultural','Cabildo':'cabildo','Centro de remate':'remate','Haras San Pedro':'haras','Corral Cordón':'corral'};
 const gmapsURL=name=>`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name+', Magdalena, Beni, Bolivia')}`;
 const pinSvg='<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 
@@ -2477,10 +2507,10 @@ function buildTimeline(){
     const open=ABIERTOS_DEFAULT.includes(fecha)?' open':'';
     pills+=`<button class="day-pill${hayStar?' has-star':''}" onclick="openDay('${fecha}')"><div class="dp-dow">${EVENTOS[evs[0]][1]}</div><div class="dp-num">${parseInt(dd)}</div><div class="dp-mon">${(MESES[mm]||'').slice(0,3)}</div></button>`;
     html+=`<div class="day-block${open}" data-fecha="${fecha}">
-      <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-header" onclick="toggleDay(this)" role="button" tabindex="0" aria-expanded="${open?'true':'false'}" aria-label="${titulo}: ${evs.length} ${evs.length===1?'actividad':'actividades'}. Toca para ${open?'ocultar':'ver'} el detalle">
         <div class="day-date"><div class="d">${parseInt(dd)}</div><div class="m">${MESES[mm]||''}</div></div>
         <div class="day-meta"><h3>${titulo}${hayStar?'<span class="badge-star">★</span>':''}</h3><p>${dia} · ${evs.length} ${evs.length===1?'actividad':'actividades'}</p></div>
-        <div class="day-chevron">▼</div>
+        <span class="day-btn"><span class="db-ver">Ver actividades (${evs.length})</span><span class="db-ocultar">Ocultar</span><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
       </div>
       <div class="day-body">`;
     evs.forEach(i=>{
@@ -2508,7 +2538,14 @@ function buildTimeline(){
 }
 buildTimeline();
 
-function toggleDay(h){h.parentElement.classList.toggle('open');}
+function toggleDay(h){
+  const abierto=h.parentElement.classList.toggle('open');
+  h.setAttribute('aria-expanded',abierto?'true':'false');
+}
+// Accesibilidad: abrir/cerrar días con Enter o Espacio (navegación por teclado)
+timeline.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('day-header')){e.preventDefault();toggleDay(e.target);}
+});
 
 /* ===== Mensaje de la Presidencia del Concejo (desplegable) ===== */
 function toggleConcejoMsg(btn){
@@ -2527,6 +2564,7 @@ function openDay(fecha){
   if(!b)return;
   b.classList.remove('hidden-day');
   b.classList.add('open');
+  const h=b.querySelector('.day-header');if(h)h.setAttribute('aria-expanded','true');
   b.scrollIntoView({behavior:'smooth',block:'center'});
   b.classList.remove('flash');void b.offsetWidth;b.classList.add('flash');
 }
@@ -2890,7 +2928,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // === SALIDA DEL INTRO ===
     let introAbierto = false;
     function ocultarPantalla(delay) {
-        setTimeout(() => { pantalla.style.display = 'none'; }, delay);
+        setTimeout(() => {
+            pantalla.style.display = 'none';
+            // Primera visita: lanzar la guía interactiva al entrar a la invitación
+            if (window.lanzarTourPrimeraVez) window.lanzarTourPrimeraVez();
+        }, delay);
     }
     function saltarIntro() {
         if (pantalla.style.display === 'none') return;
@@ -2967,6 +3009,99 @@ document.addEventListener('DOMContentLoaded', () => {
     <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
   </svg>
 </button>
+
+<!-- ===== Botón de ayuda: reabre la guía interactiva cuando el usuario lo necesite ===== -->
+<button id="btn-ayuda" class="ayuda-flotante" title="Guía de uso" aria-label="Abrir la guía de uso de la invitación">?</button>
+
+<!-- ===== Guía interactiva (tour de bienvenida con foco por pasos) ===== -->
+<div id="tourOverlay" role="dialog" aria-modal="true" aria-label="Guía de uso de la invitación">
+  <div id="tourSpot"></div>
+  <div id="tourCard"></div>
+</div>
+
+<script>
+/* ===== GUÍA INTERACTIVA — tour de bienvenida + botón de ayuda ===== */
+(function(){
+  const PASOS=[
+    {t:'¡Bienvenido! 👋',
+     p:'Esta es la invitación digital del <strong>306 aniversario de Magdalena</strong>. En cuatro pasos te mostramos cómo aprovecharla al máximo. ¡Es muy fácil!',
+     target:null},
+    {t:'Toca cada día para ver su programa',
+     p:'Cada tarjeta es un día de fiesta. Toca el botón dorado <strong>«Ver actividades»</strong> y se desplegará el detalle con horarios y lugares. Con <strong>«Agendar»</strong> guardas un evento en tu calendario.',
+     target:()=>document.querySelector('.day-block')},
+    {t:'Ubica cada sede en el mapa',
+     p:'En el mapa interactivo encuentras todos los lugares de la fiesta. Toca un pin o el nombre de un lugar en el cronograma y te llevará hasta él.',
+     target:()=>document.querySelector('.mapa-canvas')||document.getElementById('map')},
+    {t:'Música y ayuda siempre a mano',
+     p:'Con este botón controlas la música de fondo. Y si quieres volver a ver esta guía, toca el botón <strong>«?»</strong> de la esquina izquierda. ¡Que disfrutes la fiesta!',
+     target:()=>document.getElementById('btn-musica')}
+  ];
+  let paso=0;
+  const ov=document.getElementById('tourOverlay');
+  const spot=document.getElementById('tourSpot');
+  const card=document.getElementById('tourCard');
+
+  function posicionarCard(el){
+    const cw=card.offsetWidth,ch=card.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;
+    let x,y;
+    if(!el){x=(vw-cw)/2;y=(vh-ch)/2;}
+    else{
+      const r=el.getBoundingClientRect();
+      x=Math.min(Math.max(16,r.left+r.width/2-cw/2),vw-cw-16);
+      y=(r.bottom+ch+24<vh)?r.bottom+16:r.top-ch-16;
+      if(y<16)y=16;
+      if(y+ch>vh-16)y=vh-ch-16;
+    }
+    card.style.left=x+'px';card.style.top=y+'px';
+  }
+
+  function render(){
+    const s=PASOS[paso];
+    const el=s.target?s.target():null;
+    if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(()=>{
+      if(el){
+        const r=el.getBoundingClientRect();
+        spot.style.left=(r.left-8)+'px';spot.style.top=(r.top-8)+'px';
+        spot.style.width=(r.width+16)+'px';spot.style.height=(r.height+16)+'px';
+        spot.style.borderRadius='16px';
+      }else{
+        spot.style.left='50vw';spot.style.top='42vh';spot.style.width='0px';spot.style.height='0px';
+      }
+      card.innerHTML=`
+        <div class="tc-paso">Guía · Paso ${paso+1} de ${PASOS.length}</div>
+        <h4>${s.t}</h4><p>${s.p}</p>
+        <div class="tc-dots">${PASOS.map((_,i)=>`<span class="${i===paso?'on':''}"></span>`).join('')}</div>
+        <div class="tc-botones">
+          <button class="tc-saltar" onclick="cerrarTour()">Saltar guía</button>
+          <button class="tc-next" onclick="pasoTour()">${paso===PASOS.length-1?'¡Listo, a disfrutar!':'Siguiente →'}</button>
+        </div>`;
+      posicionarCard(el);
+    },el?480:60);
+  }
+
+  window.pasoTour=function(){
+    if(paso>=PASOS.length-1){cerrarTour();return;}
+    paso++;render();
+  };
+  window.cerrarTour=function(){
+    ov.classList.remove('activo');
+    try{localStorage.setItem('magdalenaTourVisto','1');}catch(e){}
+  };
+  function abrirTour(){paso=0;ov.classList.add('activo');render();}
+
+  document.getElementById('btn-ayuda').addEventListener('click',abrirTour);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('activo'))cerrarTour();});
+  window.addEventListener('resize',()=>{if(ov.classList.contains('activo'))render();});
+
+  // Primera visita: la intro llama a esta función al cerrarse el sobre
+  window.lanzarTourPrimeraVez=function(){
+    let visto=null;
+    try{visto=localStorage.getItem('magdalenaTourVisto');}catch(e){}
+    if(!visto)setTimeout(abrirTour,700);
+  };
+})();
+</script>
 
 </body>
 </html>
