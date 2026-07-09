@@ -325,7 +325,10 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 4% 6%;
             transform: translateY(2%) scale(0.96); /* dentro del sobre: 100% oculta por bolsillo y solapa */
+            opacity: 0; transition: opacity .35s ease; /* invisible hasta que la textura del sobre cargue */
         }
+        /* Al terminar de cargar sobree.webp revelamos la carta (ya tapada por la solapa): evita el flash de hoja blanca en la 1.ª carga */
+        #el-sobre.sobre-listo .carta-invitacion { opacity: 1; }
         /* textura de papel + marco interior dorado */
         .carta-invitacion::before {
             content: ''; position: absolute; inset: 0; border-radius: 6px; pointer-events: none;
@@ -404,7 +407,7 @@
         .abierto .env-luz { opacity: 1; }
         /* los textos del cabezal se retiran con elegancia para darle el escenario a la carta */
         .abierto .textos-fiesta { opacity: 0; transform: translateY(-26px); transition: opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s; }
-        .abierto .carta-invitacion { animation: cartaEmerge 1.7s cubic-bezier(0.33, 1.1, 0.4, 1) 0.8s forwards; }
+        .abierto .carta-invitacion { opacity: 1; animation: cartaEmerge 1.7s cubic-bezier(0.33, 1.1, 0.4, 1) 0.8s forwards; }
         @keyframes cartaEmerge {
             0%   { transform: translateY(2%) scale(0.96) rotate(0deg); }
             34%  { transform: translateY(-36%) scale(0.98) rotate(-0.9deg); }
@@ -1769,6 +1772,22 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
         <button id="saltar-intro" class="saltar-intro" type="button">Saltar intro ✕</button>
 
     </div>
+
+<script>
+/* Revela la carta del sobre solo cuando la textura (sobree.webp) haya cargado:
+   así en la 1.ª visita no se ve el "flash" de la hoja blanca antes de que se pinte el sobre. */
+(function(){
+  var sob=document.getElementById('el-sobre');
+  if(!sob)return;
+  var mostrar=function(){sob.classList.add('sobre-listo');};
+  var img=new Image();
+  img.onload=mostrar; img.onerror=mostrar; /* si falla, igual revelamos (no dejarla oculta) */
+  img.src='./imagenes/sobree.webp';
+  if(img.complete)mostrar(); /* ya cacheada (2.ª visita): revelar de inmediato */
+  /* Respaldo: pase lo que pase, revelar a los 1.2s para no dejar la carta oculta */
+  setTimeout(mostrar,1200);
+})();
+</script>
 
 <!-- NAV -->
 <!-- NAV RESPONSIVE MEJORADO -->
