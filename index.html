@@ -929,8 +929,11 @@ section{padding:80px 20px}
 .day-block.open .day-btn .db-ocultar{display:inline}
 .day-block.open .day-btn svg{transform:rotate(180deg)}
 @media(max-width:600px){
-  .day-header{flex-wrap:wrap;padding:14px 16px}
-  .day-btn{flex:1 1 100%;justify-content:center;margin-top:10px;padding:12px 15px;font-size:13px}
+  .day-header{padding:13px 14px;gap:10px}
+  .day-date{min-width:44px;padding-right:11px}
+  .day-date .d{font-size:26px}
+  .day-btn{padding:7px 12px;font-size:10.5px;gap:5px;letter-spacing:0}
+  .day-btn svg{width:12px;height:12px}
 }
 .day-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.22,1,.36,1)}
 .day-block.open .day-body{max-height:2600px}
@@ -950,8 +953,11 @@ section{padding:80px 20px}
 .cal-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:6px 11px;border:1.5px solid var(--gold);background:rgba(201,152,42,.08);color:var(--gold-dark);font-family:'Inter',sans-serif;font-size:11px;font-weight:700;border-radius:100px;cursor:pointer;transition:all .25s;white-space:nowrap}
 .cal-btn:hover{background:var(--gold);color:#fff}
 .cal-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
-.loc-link{font:inherit;background:none;border:none;padding:0;margin:0;cursor:pointer;color:var(--forest);font-size:12px;display:inline-flex;align-items:center;gap:4px;transition:color .2s;border-bottom:1px dashed rgba(26,87,48,.35)}
-.loc-link:hover{color:var(--orange);border-bottom-color:var(--orange)}
+/* Sede accionable: chip dorado que invita a tocarlo para ir al mapa */
+.loc-link{font:inherit;background:var(--gold-light);border:1px solid var(--gold-glow);padding:4px 11px 4px 9px;margin:0;cursor:pointer;color:var(--gold-dark);font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:5px;border-radius:100px;transition:all .2s;box-shadow:0 1px 3px rgba(180,120,40,.12)}
+.loc-link::after{content:'Ver en mapa';font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--gold);opacity:.85;border-left:1px solid var(--gold-glow);padding-left:6px;margin-left:1px}
+.loc-link:hover{background:var(--gold);color:#fff;border-color:var(--gold);box-shadow:0 4px 12px rgba(180,120,40,.28)}
+.loc-link:hover::after{color:#fff;border-left-color:rgba(255,255,255,.5);opacity:.9}
 .loc-link svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
 
 /* =========================================
@@ -1128,7 +1134,13 @@ section{padding:80px 20px}
 .mapa-pin { color: var(--gold); flex-shrink: 0; display: flex; }
 .mapa-pin svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; }
 .mapa-item .mapa-name { flex: 1; min-width: 0; }
-.mapa-item .mapa-arrow { display: none; } 
+.mapa-item .mapa-arrow { display: none; }
+
+/* En celular las sedes son pastillas horizontales: las achicamos para que no se vean tan grandes */
+@media(max-width: 879px) {
+  .mapa-item { padding: 8px 14px; font-size: 12px; gap: 6px; }
+  .mapa-pin svg { width: 15px; height: 15px; }
+}
 
 /* =========================================
    LISTA DE SEDES - PC (Vertical clásica)
@@ -1597,7 +1609,7 @@ footer .footer-line{width:50px;height:1px;background:var(--gold);margin:20px aut
 }
 
 /* ===== GUÍA INTERACTIVA (tour de bienvenida) Y BOTÓN DE AYUDA ===== */
-.ayuda-flotante{position:fixed !important;bottom:25px;left:20px;width:48px;height:48px;background:var(--forest-dark);color:#fff;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;box-shadow:0 4px 14px rgba(0,0,0,.3);cursor:pointer;z-index:999999 !important;transition:all .3s ease;opacity:.9;-webkit-transform:translateZ(0)}
+.ayuda-flotante{position:fixed !important;bottom:25px;left:20px;width:48px;height:48px;background:var(--gold);color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:700;box-shadow:0 4px 14px rgba(180,120,40,.4);cursor:pointer;z-index:999999 !important;transition:all .3s ease;opacity:.85;-webkit-transform:translateZ(0)}
 .ayuda-flotante:hover{transform:scale(1.1);opacity:1}
 @media(max-width:768px){.ayuda-flotante{bottom:35px;left:15px}}
 #tourOverlay{position:fixed;inset:0;z-index:1000000;display:none}
@@ -2930,6 +2942,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function ocultarPantalla(delay) {
         setTimeout(() => {
             pantalla.style.display = 'none';
+            // Ya estamos en la portada: recién aquí mostramos el botón de ayuda (no en el sobre)
+            const btnAyuda = document.getElementById('btn-ayuda');
+            if (btnAyuda) btnAyuda.style.display = 'flex';
             // Primera visita: lanzar la guía interactiva al entrar a la invitación
             if (window.lanzarTourPrimeraVez) window.lanzarTourPrimeraVez();
         }, delay);
@@ -3087,6 +3102,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.cerrarTour=function(){
     ov.classList.remove('activo');
     try{localStorage.setItem('magdalenaTourVisto','1');}catch(e){}
+    // Al terminar (o saltar) la guía, devolvemos al usuario a la portada / sección de inicio
+    const inicio=document.getElementById('inicio');
+    if(inicio)inicio.scrollIntoView({behavior:'smooth',block:'start'});
   };
   function abrirTour(){paso=0;ov.classList.add('activo');render();}
 
